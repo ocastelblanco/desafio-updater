@@ -1,0 +1,70 @@
+{
+  "archivos": {
+    "reemplazar": [
+      "/favicon.ico",
+      "/Principal.html",
+      "/int/logoPlaneta.svg",
+      "css/app.css",
+      "js/main.js"
+    ],
+    "eliminar": [
+      "/*.pdf",
+      "/*.docx",
+      "/*.doc",
+      "/*.xlsx",
+      "/*.xls",
+      "/*.png",
+      "/*.jpg",
+      "/*.jpeg",
+      "/print.html"
+    ]
+  },
+  "contenidos": [
+    {
+      "ruta": "/views",
+      "nombre": "pag04.html",
+      "reemplazos": [
+        {
+          "pattern": "/(Para\\s+tener\\s+una\\s+visión\\s+general\\s+)[^,]+(,\\s+consulta\\s+estos\\s+enlaces:)/i",
+          "replacement": "$1sobre el tema$2"
+        },
+        {
+          "pattern": "/Explora(\\s+la\\s+Red\\s+y\\s+encuentra\\s+todos\\s+aquellos\\s+recursos\\s+que\\s+puedan\\s+ayudarte\\s+con\\s+tu\\s+)tema\\./i",
+          "replacement": "Sigue explorando$1investigación."
+        }
+      ]
+    },
+    {
+      "ruta": "/views",
+      "nombre": "pag06.html",
+      "reemplazos": [
+        {
+          "pattern": "/(Ahora\\s+que\\s+ya\\s+dominas\\s+tu\\s+tema,\\s+)[^<]+/i",
+          "replacement": "$1aplica tus dotes para profundizar en otros aspectos relacionados con este."
+        },
+        {
+          "pattern": "/Recuerda\\s+que\\s+dispones\\s+de\\s+los\\s+recursos\\s+[^>]+>Cuaderno\\s+de\\s+aprendizaje<\/a>:/i",
+          "replacement": "Puedes centrarte en alguna de las siguientes propuestas:"
+        },
+        {
+          "pattern": "/(<strong>)Además,\\s+también\\s+encontrarás\\s+los\\s+recursos\\s+([^>]+>){3}(\\.<\/strong>)/i",
+          "replacement": "$1Ten en cuenta los pasos necesarios para completar el trabajo de investigación y ampliar, con ello, tus conocimientos sobre el tema$3"
+        }
+      ]
+    },
+    {
+      "ruta": "/views",
+      "nombre": "pag08.html",
+      "reemplazos": [
+        {
+          "pattern": "/(Demuestra\\s+cuánto\\s+)sabes(\\s+sobre\\s+.+)realizando[^>]+>Autoevaluación<\/a>\\s+del\\s+tema(\\.<\/strong>)/i",
+          "replacement": "$1has aprendido$2resolviendo las pruebas de Aulaplaneta$3"
+        },
+        {
+          "pattern": "/No\\s+olvides\\s+valorar\\s+tus\\s+logros\\s+mediante/i",
+          "replacement": "Al final, no olvides valorar tus logros con"
+        }
+      ]
+    }
+  ]
+}
