@@ -6,6 +6,8 @@ const  BACKUP_FOLDER = __DIR__ . DIRECTORY_SEPARATOR . "backup" . DIRECTORY_SEPA
 const ORIGEN = __DIR__ . DIRECTORY_SEPARATOR . "origen" . DIRECTORY_SEPARATOR;
 const FUENTES = __DIR__ . DIRECTORY_SEPARATOR . "fuentes" . DIRECTORY_SEPARATOR;
 const NOMBRE_ZIP = "_resource_content.zip";
+const RUTA_MODELO = __DIR__ . DIRECTORY_SEPARATOR . "modelo" . DIRECTORY_SEPARATOR;
+const RUTA_DATOS = RUTA_MODELO . "data" . DIRECTORY_SEPARATOR . "cambios.json";
 
 // Variables generales
 $np = [ // Convierte los nombres de las páginas
@@ -19,6 +21,8 @@ $ns = [ // Convierte los nombres de las secciones de la pag04 únicamente
   "Inglés" => "sec04_ingles",
 ];
 
+// Genera los cambios fijos para, luego, insertarlos en la estructura de cambios de cada recurso
+$cambiosFijos = json_decode(file_get_contents(RUTA_DATOS), true);
 
 // Genera el índice de Desafíos
 $indice = [];
@@ -58,7 +62,7 @@ foreach ($listaFuentes as $fuente) {
         $listaCambios[$id] = [
           "ruta" => $ruta,
           "cambiosEditoriales" => [],
-          "cambiosFijos" => []
+          "cambiosFijos" => $cambiosFijos
         ];
       }
       if (!array_key_exists($nomPag, $listaCambios[$id]["cambiosEditoriales"])) { // Si no existe la página, se crea
@@ -100,27 +104,85 @@ foreach ($listaFuentes as $fuente) {
 }
 
 // Itera la lista de recursos para reemplazar los arrays de pag06 y secciones de pag04 por HTML completo (adiciona la etiqueta <ul>) en los cambios editoriales
+// Mueve los cambios al elemento ["replacement"] y crea el ["pattern"] para todas las combinaciones pag / seccion
 foreach ($listaCambios as &$recurso) {
-  $recurso["cambiosEditoriales"]["pag06"] = "<ul>\n" . implode("\n", $recurso["cambiosEditoriales"]["pag06"]) . "\n</ul>";
-  $recurso["cambiosEditoriales"]["pag04"]["sec01"] = "<ul>\n" . implode("\n", $recurso["cambiosEditoriales"]["pag04"]["sec01"]) . "\n</ul>";
-  $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"] = "<ul>\n" . implode("\n", $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"]) . "\n</ul>";
+  // Para pag06
+  $pag06replacement = "<ul>\n" . implode("\n", $recurso["cambiosEditoriales"]["pag06"]) . "\n</ul>";
+  $recurso["cambiosEditoriales"]["pag06"] = [];
+  $recurso["cambiosEditoriales"]["pag06"]["replacement"] = $pag06replacement;
+  $recurso["cambiosEditoriales"]["pag06"]["pattern"] = '/<ul>.*?<\/ul>/s';
+  // Para pag08
+  $pag08replacement = "$1" . remueveTag($recurso["cambiosEditoriales"]["pag08"], "strong") . "$2";
+  $recurso["cambiosEditoriales"]["pag08"] = [];
+  $recurso["cambiosEditoriales"]["pag08"]["replacement"] = $pag08replacement;
+  $recurso["cambiosEditoriales"]["pag08"]["pattern"] = '/(<h3\s+class="texto-resaltado">).+(<\\/h3>)/s';
+  // Para pag04
+  // sec01
+  $pag04sec01replacement = "$1<ul>\n" . implode("\n", $recurso["cambiosEditoriales"]["pag04"]["sec01"]) . "\n</ul>";
+  $recurso["cambiosEditoriales"]["pag04"]["sec01"] = [];
+  $recurso["cambiosEditoriales"]["pag04"]["sec01"]["replacement"] = $pag04sec01replacement;
+  $recurso["cambiosEditoriales"]["pag04"]["sec01"]["pattern"] = '/(<p>.*<strong>.*Propón.+uno.+o.+escoge.+entre.+los.+siguientes:.*<\/strong>.*<\/p>.*)<ul>.*?<\/ul>/s';
+  // sec04_enlaces
+  $pag04sec04enlacesReplacement = "$1<ul>\n" . implode("\n", $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"]) . "\n</ul>";
+  $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"] = [];
+  $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"]["replacement"] = $pag04sec04enlacesReplacement;
+  $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"]["pattern"] = '/(<p>.*<strong>.*Para.+tener.+una.+visión.+general.+sobre.+el.+tema,.+consulta.+estos.+enlaces:.*<\/strong>.*<\/p>).*<ul>.*?<\/ul>/s';
+  // sec04_ingles
+  $pag04sec04inglesReplacement = "$1" . $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"] . "$2";
+  $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"] = [];
+  $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"]["replacement"] = $pag04sec04inglesReplacement;
+  $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"]["pattern"] = '/(<p>.*<strong>.*Si.+te.+atreves.+con.+el.+inglés,.+consulta.*<\/strong>.*).*?(<\/p>)/s';
+}
+debug("Se inicia el ciclo de aplicación de cambios" . "\n");
+// Itera la lista de recursos y aplica los cambios <------------- Cambios sobre archivos y carpetas
+$zip = new ZipArchive;
+foreach ($listaCambios as $idRecurso => $cambio) {
+  debug("└─ Realizando cambios al recurso $idRecurso" . "\n");
+  // Copia el ZIP para tenerlo de backup.
+  $destino = creaDirs(getRutaRecurso($idRecurso, false), BACKUP_FOLDER) . NOMBRE_ZIP;
+  if (file_exists($destino)) {
+    debug(" └─ La copia de seguridad ya existe" . "\n");
+  } else {
+    copy($cambio["ruta"], $destino);
+    debug(" └─ Creando copia de seguridad del ZIP original" . "\n");
+  }
+  // Se abre el ZIP en la carpeta destino
+  $zip->open($cambio["ruta"]);
+  // --------- Efectúa los cambios fijos
+  // Reemplazos de archivos
+  $reemplazar = $cambio["cambiosFijos"]["archivos"]["reemplazar"];
+  foreach ($reemplazar as $replace) {
+    $idRep = $zip->locateName(ltrim($replace, "/"));
+    $filePath = RUTA_MODELO . ltrim($replace, "/");
+    $zip->replaceFile($filePath, $idRep);
+    debug(" └─ Reemplazando archivo $replace" . "\n");
+  }
+  // Eliminación de archivos
+  $eliminar = $cambio["cambiosFijos"]["archivos"]["eliminar"];
+  foreach ($eliminar as $elimina) {
+    eliminaPorNombre($zip, $elimina);
+  }
+  // Cambios de texto en vistas
+  $contenidos = $cambio["cambiosFijos"]["contenidos"];
+  foreach ($contenidos as $contenido) {
+    $rutaCont = $contenido["ruta"] . $contenido["nombre"];
+    debug(" └─ Cambiando texto en $rutaCont" . "\n");
+    $subject = $zip->getFromName($rutaCont);
+    $reempCont = $contenido["reemplazos"];
+    $ciclo = 0;
+    foreach ($reempCont as $repCont) {
+      $ciclo++;
+      $subject = preg_replace($repCont["pattern"], $repCont["replacement"], $subject, -1, $countR);
+      debug("   └─ Reemplazo $ciclo: $countR" . "\n");
+    }
+    $zip->deleteName($rutaCont);
+    $zip->addFromString($rutaCont, $subject, ZipArchive::OVERWRITE);
+  }
+  // Se cierra el ZIP.
+  $zip->close();
 }
 
 
-
-print_r($listaCambios);
-print PHP_EOL;
-
-
-
-
-
-
-
-
-/*
-$zip = new ZipArchive;
-*/
 
 // Funciones
 function getRecursoID($fila, $indice)
@@ -135,7 +197,43 @@ function getRecursoID($fila, $indice)
   }
   return null;
 }
-function getRutaRecurso($id)
+function getRutaRecurso($id, $conZIP = true)
 {
-  return implode(DIRECTORY_SEPARATOR, str_split(str_pad($id, 9, "0", STR_PAD_LEFT), 3)) . DIRECTORY_SEPARATOR . NOMBRE_ZIP;
+  return implode(DIRECTORY_SEPARATOR, str_split(str_pad($id, 9, "0", STR_PAD_LEFT), 3)) . DIRECTORY_SEPARATOR .
+    ($conZIP ? NOMBRE_ZIP : "");
+}
+function remueveTag($texto, $tag)
+{
+  $pattern = sprintf('/<%s\b[^>]*>(.*?)<\/%s>/is', preg_quote($tag, '/'), preg_quote($tag, '/'));
+  $textoLimpio = preg_replace($pattern, '$1', $texto);
+  return $textoLimpio;
+}
+function creaDirs($ruta, $destino)
+{
+  $rutaCompleta = rtrim($destino, '/') . '/' . ltrim($ruta, '/');
+  if (!file_exists($rutaCompleta)) mkdir($rutaCompleta, 0777, true);
+  return $rutaCompleta;
+}
+function eliminaPorNombre($zip, $extension)
+{
+  if (str_contains($extension, "*")) {
+    $pattern = '/' . preg_quote(trim($extension, '*'), '/') . '$/i';
+    for ($i = 0; $i < $zip->numFiles; $i++) {
+      $componentes = explode("/", $zip->getNameIndex($i));
+      $nombreArchivo = array_pop($componentes);
+      if (preg_match($pattern, $nombreArchivo) && $componentes == []) {
+        $zip->deleteName($nombreArchivo);
+        debug(" └─ Borrando $nombreArchivo" . "\n");
+      }
+    }
+    return;
+  }
+  debug(" └─ Borrando $extension" . "\n");
+  $zip->deleteName($extension);
+}
+function debug($texto)
+{
+  $fechaHora = new DateTime();
+  $timestampISO = $fechaHora->format(DateTime::ATOM);
+  file_put_contents("debug.txt", $timestampISO . " :: " . $texto, FILE_APPEND);
 }
