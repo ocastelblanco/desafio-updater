@@ -1,0 +1,335 @@
+﻿asset_id;module_title;unit_code;proyecto
+5370;Desafío: Los reinos de moneras, protoctistas y hongos;CN_06_03_CO;Colombia
+19488;Desafío: El cuerpo humano;BG_09_01_LM;España
+19618;Desafío: El aparato digestivo: la nutrición y la alimentación;BG_09_02_LM;España
+19705;Desafío: El aparato circulatorio;BG_09_04_LM;España
+19795;Desafío: La coordinación: los sistemas nervioso y endocrino;BG_09_05_LM;España
+19888;Desafío: Los órganos de los sentidos;BG_09_06_LM;España
+19982;Desafío: El aparato locomotor;BG_09_07_LM;España
+20080;Desafío: La reproducción y la sexualidad;BG_09_08_LM;España
+20185;Desafío: El sistema inmunitario, la salud y la enfermedad;BG_09_09_LM;España
+20291;Desafío: El relieve y los agentes geológicos externos;BG_09_11_LM;España
+20392;Desafío: El aparato respiratorio;BG_09_13_LM;España
+20481;Desafío: El aparato excretor;BG_09_14_LM;España
+20588;Desafío: La energía interna de la Tierra;BG_09_15_LM;España
+20705;Desafío: El planeta Tierra;BG_10_01_LM;España
+20844;Desafío: La historia de la Tierra;BG_10_02_LM;España
+20937;Desafío: La tectónica de placas;BG_10_03_LM;España
+21030;Desafío: La célula;BG_10_05_LM;España
+21120;Desafío: La reproducción celular;BG_10_06_LM;España
+21209;Desafío: La herencia de los caracteres;BG_10_07_LM;España
+21300;Desafío: El material genético y la biotecnología;BG_10_08_LM;España
+21401;Desafío: La evolución biológica;BG_10_09_LM;España
+21505;Desafío: Los ecosistemas;BG_10_11_LM;España
+21591;Desafío: Las adaptaciones de los seres vivos;BG_10_12_LM;España
+21693;Desafío: La especie humana y el medio natural;BG_10_13_LM;España
+21802;Desafío: El universo y el sistema solar;CN_07_01_LM;España
+21930;Desafío: La Tierra en el universo;CN_07_02_LM;España
+22022;Desafío: La atmósfera;CN_07_03_LM;España
+22115;Desafío: La hidrosfera;CN_07_04_LM;España
+22214;Desafío: Los seres vivos;CN_07_06_LM;España
+22313;Desafío: El reino de las plantas;CN_07_07_LM;España
+22422;Desafío: El reino animal: animales invertebrados;CN_07_08_LM;España
+22538;Desafío: El reino animal: animales vertebrados;CN_07_09_LM;España
+22654;Desafío: Los reinos de moneras, protoctistas y hongos;CN_07_10_LM;España
+22715;Desafío: La materia: características;CN_07_11_LM;España
+22793;Desafío: La materia: propiedades;CN_07_12_LM;España
+22867;Desafío: Las unidades de medida;CN_07_13_LM;España
+22983;Desafío: El medio ambiente;CN_07_14_LM;España
+23057;Desafío: La geosfera;CN_07_15_LM;España
+23155;Desafío: Las rocas y los minerales;CN_07_16_LM;España
+23244;Desafío: El reino animal: funciones;CN_07_17_LM;España
+23341;Desafío: El reino de las plantas: funciones;CN_07_18_LM;España
+23432;Desafío: El método científico;CN_07_19_LM;España
+23530;Desafío: Los ecosistemas;CN_07_20_LM;España
+23622;Desafío: La energía;CN_08_06_LM;España
+23709;Desafío: La electricidad;CN_08_07_LM;España
+23789;Desafío: El calor y la temperatura;CN_08_09_LM;España
+23865;Desafío: El movimiento;CN_08_10_LM;España
+23935;Desafío: La fuerza y la presión;CN_08_11_LM;España
+24023;Desafío: El método científico;CN_08_12_LM;España
+24163;Desafío: La Tierra: sistemas de representación;CS_07_01_LM;España
+24422;Desafío: El relieve terrestre;CS_07_02_LM;España
+24644;Desafío: Los ríos y mares de la Tierra;CS_07_03_LM;España
+24891;Desafío: El clima: factores y elementos;CS_07_04_LM;España
+25149;Desafío: Los paisajes de la Tierra;CS_07_05_LM;España
+25363;Desafío: Los ecosistemas y el medio ambiente;CS_07_06_LM;España
+25564;Desafío: Introducción a la historia y la prehistoria;CS_07_07_LM;España
+25761;Desafío: Primeras civilizaciones: Mesopotamia, Egipto y Fenicia;CS_07_08_LM;España
+25934;Desafío: La civilización griega;CS_07_09_LM;España
+26127;Desafío: La civilización romana;CS_07_10_LM;España
+26342;Desafío: La península Ibérica en la edad antigua;CS_07_11_LM;España
+26661;Desafío: El relieve, costas y ríos de España;CS_07_13_LM;España
+26916;Desafío: La Tierra en el sistema solar;CS_07_14_LM;España
+27121;Desafío: La población en el mundo;CS_08_01_LM;España
+27315;Desafío: La población en España y Europa;CS_08_03_LM;España
+27546;Desafío: La organización política y territorial de España, Europa y el mundo;CS_08_04_LM;España
+27840;Desafío: La ciudad y el proceso de urbanización;CS_08_06_LM;España
+28011;Desafío: La Alta Edad Media (siglos V-XI);CS_08_08_LM;España
+28210;Desafío: La península Ibérica en la Alta Edad Media;CS_08_09_LM;España
+28389;Desafío: La Baja Edad Media (siglos XIV-XV);CS_08_11_LM;España
+28545;Desafío: La península Ibérica en la Baja Edad Media;CS_08_12_LM;España
+28690;Desafío: Los inicios de la historia moderna (siglo XV);CS_08_14_LM;España
+28874;Desafío: Las monarquías autoritarias y los Imperios (siglo XVI);CS_08_15_LM;España
+29099;Desafío: El absolutismo (siglo XVII);CS_08_16_LM;España
+29330;Desafío: La Plena Edad Media (siglos XI-XIII);CS_08_18_LM;España
+29536;Desafío: La península Ibérica en la Plena Edad Media;CS_08_19_LM;España
+29927;Desafío: La cultura y el arte en la Edad Media;CS_08_20_LM;España
+30357;Desafío: El medio físico del mundo, Europa y España;CS_09_01_LM;España
+30645;Desafío: El sector primario;CS_09_02_LM;España
+30772;Desafío: El sector secundario;CS_09_03_LM;España
+30899;Desafío: El sector terciario;CS_09_04_LM;España
+31098;Desafío: Las actividades económicas en España y Europa;CS_09_05_LM;España
+31326;Desafío: Las actividades económicas y el territorio;CS_09_06_LM;España
+31464;Desafío: La organización política del mundo;CS_09_07_LM;España
+31598;Desafío: Europa y la Unión Europea;CS_09_08_LM;España
+31783;Desafío: La organización política y social de España;CS_09_09_LM;España
+31951;Desafío: La organización económica del mundo actual;CS_09_12_LM;España
+32086;Desafío: La población y los recursos;CS_09_13_LM;España
+32249;Desafío: El fin del Antiguo Régimen;CS_10_01_LM;España
+32396;Desafío: La era de las revoluciones liberales;CS_10_02_LM;España
+32509;Desafío: La revolución industrial y el primer capitalismo;CS_10_03_LM;España
+32630;Desafío: La sociedad industrial y sus ideologías;CS_10_04_LM;España
+32869;Desafío: España: de la guerra de la Independencia a la crisis del 98;CS_10_05_LM;España
+33116;Desafío: El imperialismo y la Primera Guerra Mundial;CS_10_06_LM;España
+33243;Desafío: El período de entreguerras;CS_10_07_LM;España
+33424;Desafío: España: de la crisis de la Restauración a la Guerra Civil;CS_10_08_LM;España
+33604;Desafío: La Segunda Guerra Mundial;CS_10_09_LM;España
+33723;Desafío: El mundo después de la Segunda Guerra Mundial;CS_10_10_LM;España
+33877;Desafío: España: la dictadura y la democracia;CS_10_11_LM;España
+34035;Desafío: El mundo reciente entre los siglos XX y XXI;CS_10_12_LM;España
+34162;Desafío: La cultura y el arte de los siglos XIX y XX;CS_10_13_LM;España
+34354;Desafío: La Europa del siglo XVIII;CS_10_14_LM;España
+34565;Desafío: La era de la globalización;CS_10_15_LM;España
+42291;Desafío: Los cambios químicos;FQ_08_01_LM;España
+42761;Desafío: La ciencia;FQ_09_01_LM;España
+42918;Desafío: La estructura de la materia;FQ_09_02_LM;España
+43034;Desafío: Los elementos químicos;FQ_09_03_LM;España
+43128;Desafío: Los estados de la materia;FQ_09_04_LM;España
+43228;Desafío: Las reacciones químicas;FQ_09_06_LM;España
+43326;Desafío: La química y la sociedad;FQ_09_07_LM;España
+43439;Desafío: La electricidad;FQ_09_08_LM;España
+43571;Desafío: El magnetismo;FQ_09_09_LM;España
+43701;Desafío: La energía;FQ_09_11_LM;España
+43779;Desafío: La cinemática;FQ_10_01_LM;España
+43904;Desafío: La fuerza;FQ_10_02_LM;España
+43989;Desafío: La dinámica;FQ_10_03_LM;España
+44073;Desafío: La gravedad;FQ_10_04_LM;España
+44155;Desafío: La hidrostática;FQ_10_05_LM;España
+44241;Desafío: El trabajo, la potencia y la energía;FQ_10_06_LM;España
+44314;Desafío: El calor;FQ_10_08_LM;España
+44397;Desafío: La estructura de la materia;FQ_10_10_LM;España
+44458;Desafío: Los elementos químicos;FQ_10_11_LM;España
+44518;Desafío: Las reacciones químicas;FQ_10_12_LM;España
+44583;Desafío: La química orgánica;FQ_10_13_LM;España
+44657;Desafío: La actividad científica;FQ_10_14_LM;España
+56701;Desafío: El universo;MN_3C_01_LM;España
+56957;Desafío: El planeta Tierra;MN_3C_02_LM;España
+57137;Desafío: Las capas de la Tierra;MN_3C_03_LM;España
+57256;Desafío: Los seres vivos;MN_3C_07_LM;España
+57358;Desafío: Los ecosistemas;MN_3C_08_LM;España
+57510;Desafío: El reino de las plantas;MN_3C_10_LM;España
+57631;Desafío: La célula;MN_3C_11_LM;España
+57733;Desafío: El ser humano;MN_3C_12_LM;España
+57842;Desafío: La función de relación en el ser humano;MN_3C_13_LM;España
+57936;Desafío: El aparato digestivo y el aparato excretor;MN_3C_14_LM;España
+58044;Desafío: El aparato respiratorio en el ser humano;MN_3C_15_LM;España
+58152;Desafío: El aparato circulatorio en el ser humano;MN_3C_16_LM;España
+58260;Desafío: La función de reproducción en el ser humano;MN_3C_17_LM;España
+58394;Desafío: La energía;MN_3C_19_LM;España
+58500;Desafío: La electricidad;MN_3C_20_LM;España
+58614;Desafío: La luz;MN_3C_21_LM;España
+58717;Desafío: El sonido;MN_3C_22_LM;España
+58816;Desafío: El movimiento y la velocidad;MN_3C_23_LM;España
+58923;Desafío: El reino animal;MN_3C_24_LM;España
+59050;Desafío: Las máquinas y los objetos;MN_3C_25_LM;España
+59159;Desafío: La salud;MN_3C_26_LM;España
+59258;Desafío: La materia y los materiales;MN_3C_27_LM;España
+59333;Desafío: Las sustancias y los cambios químicos;MN_3C_28_LM;España
+59541;Desafío: Los sistemas de representación del espacio;MS_3C_01_LM;España
+59835;Desafío: La población;MS_3C_02_LM;España
+60163;Desafío: Los sectores económicos;MS_3C_03_LM;España
+60370;Desafío: Introducción a la historia;MS_3C_06_LM;España
+60585;Desafío: La prehistoria;MS_3C_07_LM;España
+60800;Desafío: La historia antigua de España;MS_3C_09_LM;España
+61097;Desafío: La historia medieval de España;MS_3C_11_LM;España
+61496;Desafío: La historia moderna de España;MS_3C_13_LM;España
+61922;Desafío: La historia contemporánea de España;MS_3C_15_LM;España
+62320;Desafío: El relieve, ríos y costas de España;MS_3C_16_LM;España
+62584;Desafío: El relieve, ríos y costas de Europa;MS_3C_17_LM;España
+62903;Desafío: La organización política de España;MS_3C_19_LM;España
+63179;Desafío: La organización política de Europa;MS_3C_20_LM;España
+63396;Desafío: El relieve y la hidrografía;MS_3C_21_LM;España
+63598;Desafío: El clima y el paisaje;MS_3C_22_LM;España
+63794;Desafío: La educación vial;MS_3C_23_LM;España
+63983;Desafío: La vida económica;MS_3C_24_LM;España
+64210;Desafío: La intervención humana en el medio;MS_3C_25_LM;España
+64490;Desafío: Los climas y paisajes de España;MS_3C_26_LM;España
+64738;Desafío: Los climas y paisajes de Europa;MS_3C_27_LM;España
+106940;Desafío: Los estados de la materia;FQ_09_03_LL;España
+120725;Desafío: La gravedad;CN_11_19_CO;Colombia
+123068;Desafío: Introducción a la historia;MS_3C_07_LM;España
+135758;Desafío: Los ecosistemas;BG_09_NX_LL;España
+135788;Desafío: El medio ambiente;BG_09_NX_LL;España
+135811;Desafío: El aparato excretor;BG_09_NX_LL;España
+135829;Desafío: El aparato respiratorio;BG_09_NX_LL;España
+135848;Desafío: El relieve y los agentes geológicos externos;BG_09_NX_LL;España
+135866;Desafío: El sistema inmunitario, la salud y la enfermedad;BG_09_NX_LL;España
+135885;Desafío: La reproducción y la sexualidad;BG_09_NX_LL;España
+135903;Desafío: El aparato locomotor;BG_09_NX_LL;España
+135921;Desafío: Los órganos de los sentidos;BG_09_NX_LL;España
+135940;Desafío: El aparato circulatorio;BG_09_NX_LL;España
+135958;Desafío: El aparato digestivo: la nutrición y la alimentación;BG_09_NX_LL;España
+135976;Desafío: El cuerpo humano;BG_09_NX_LL;España
+135994;Desafío: La energía interna de la Tierra;BG_09_NX_LL;España
+136020;Desafío: La coordinación: los sistemas nervioso y endocrino;BG_09_NX_LL;España
+136053;Desafío: El método científico;BG_07_NX_LL;España
+136087;Desafío: El reino de las plantas: funciones;BG_07_NX_LL;España
+136106;Desafío: El reino animal: funciones;BG_07_NX_LL;España
+136124;Desafío: Las rocas y los minerales;BG_07_NX_LL;España
+136143;Desafío: La geosfera;BG_07_NX_LL;España
+136161;Desafío: Los reinos de moneras, protoctistas y hongos;BG_07_NX_LL;España
+136179;Desafío: El reino animal: animales vertebrados;BG_07_NX_LL;España
+136197;Desafío: El reino animal: animales invertebrados;BG_07_NX_LL;España
+136215;Desafío: El reino de las plantas;BG_07_NX_LL;España
+136233;Desafío: Los seres vivos;BG_07_NX_LL;España
+136251;Desafío: La hidrosfera;BG_07_NX_LL;España
+136269;Desafío: La atmósfera;BG_07_NX_LL;España
+136287;Desafío: La Tierra en el universo;BG_07_NX_LL;España
+136306;Desafío: El universo y el sistema solar;BG_07_NX_LL;España
+136397;Desafío: La especie humana y el medio natural;BG_10_NX_LL;España
+136416;Desafío: Las adaptaciones de los seres vivos;BG_10_NX_LL;España
+136434;Desafío: Los ecosistemas;BG_10_NX_LL;España
+136453;Desafío: La evolución biológica;BG_10_NX_LL;España
+136472;Desafío: El material genético y la biotecnología;BG_10_NX_LL;España
+136490;Desafío: La herencia de los caracteres;BG_10_NX_LL;España
+136508;Desafío: La reproducción celular;BG_10_NX_LL;España
+136527;Desafío: La célula;BG_10_NX_LL;España
+136546;Desafío: La tectónica de placas;BG_10_NX_LL;España
+136565;Desafío: La historia de la Tierra;BG_10_NX_LL;España
+136584;Desafío: El planeta Tierra;BG_10_NX_LL;España
+136664;Desafío: La materia y los materiales;MN_05_NX_LL;España
+136683;Desafío: Las máquinas y los objetos;MN_05_NX_LL;España
+136701;Desafío: El reino animal;MN_05_NX_LL;España
+136719;Desafío: La energía;MN_05_NX_LL;España
+136738;Desafío: El aparato circulatorio en el ser humano;MN_05_NX_LL;España
+136757;Desafío: El aparato respiratorio en el ser humano;MN_05_NX_LL;España
+136776;Desafío: El aparato digestivo y el aparato excretor;MN_05_NX_LL;España
+136796;Desafío: El ser humano;MN_05_NX_LL;España
+136814;Desafío: El reino de las plantas;MN_05_NX_LL;España
+136839;Desafío: Los seres vivos;MN_05_NX_LL;España
+136912;Desafío: Las sustancias y los cambios químicos;MN_06_NX_LL;España
+136930;Desafío: La salud;MN_06_NX_LL;España
+136949;Desafío: El movimiento y la velocidad;MN_06_NX_LL;España
+136967;Desafío: El sonido;MN_06_NX_LL;España
+136986;Desafío: La luz;MN_06_NX_LL;España
+137005;Desafío: La electricidad;MN_06_NX_LL;España
+137023;Desafío: La función de reproducción en el ser humano;MN_06_NX_LL;España
+137044;Desafío: La función de relación en el ser humano;MN_06_NX_LL;España
+137067;Desafío: La célula;MN_06_NX_LL;España
+137104;Desafío: Los ecosistemas;MN_06_NX_LL;España
+137192;Desafío: La estructura de la materia;FQ_10_NX_LL;España
+137211;Desafío: El trabajo, la potencia y la energía;FQ_10_NX_LL;España
+137230;Desafío: La hidrostática;FQ_10_NX_LL;España
+137254;Desafío: La gravedad;FQ_10_NX_LL;España
+137273;Desafío: La dinámica;FQ_10_NX_LL;España
+137294;Desafío: La fuerza;FQ_10_NX_LL;España
+137314;Desafío: La cinemática;FQ_10_NX_LL;España
+137359;Desafío: La actividad científica;FQ_10_NX_LL;España
+137379;Desafío: La química orgánica;FQ_10_NX_LL;España
+137400;Desafío: Los elementos químicos;FQ_10_NX_LL;España
+137423;Desafío: El calor;FQ_10_NX_LL;España
+137442;Desafío: Las reacciones químicas;FQ_10_NX_LL;España
+137499;Desafío: La energía;FQ_09_NX_LL;España
+137520;Desafío: El magnetismo;FQ_09_NX_LL;España
+137541;Desafío: La electricidad;FQ_09_NX_LL;España
+137560;Desafío: La química y la sociedad;FQ_09_NX_LL;España
+137579;Desafío: Las reacciones químicas;FQ_09_NX_LL;España
+137600;Desafío: Los estados de la materia;FQ_09_NX_LL;España
+137620;Desafío: Los elementos químicos;FQ_09_NX_LL;España
+137641;Desafío: La estructura de la materia;FQ_09_NX_LL;España
+137660;Desafío: La ciencia;FQ_09_NX_LL;España
+137767;Desafío: Los cambios químicos;FQ_08_NX_LL;España
+137786;Desafío: El calor y la temperatura;FQ_08_NX_LL;España
+137804;Desafío: La electricidad;FQ_08_NX_LL;España
+137823;Desafío: La energía;FQ_08_NX_LL;España
+137843;Desafío: Las unidades de medida;FQ_08_NX_LL;España
+137862;Desafío: Las propiedades de lamateria;FQ_08_NX_LL;España
+137882;Desafío: Las características de la materia;FQ_08_NX_LL;España
+137900;Desafío: El movimiento;FQ_08_NX_LL;España
+137920;Desafío: El método científico;FQ_08_NX_LL;España
+137943;Desafío: La fuerza y la presión;FQ_08_NX_LL;España
+137969;Desafío: El clima: factores y elementos;GH_07_NX_LL;España
+137988;Desafío: El relieve terrestre;GH_07_NX_LL;España
+138007;Desafío: El relieve, costas y ríos de España;GH_07_NX_LL;España
+138026;Desafío: Introducción a la historia y la prehistoria;GH_07_NX_LL;España
+138045;Desafío: La civilización griega;GH_07_NX_LL;España
+138064;Desafío: La civilización romana;GH_07_NX_LL;España
+138083;Desafío: La península Ibérica en la Edad Antigua;GH_07_NX_LL;España
+138102;Desafío: La Tierra en el sistema solar;GH_07_NX_LL;España
+138121;Desafío: La Tierra: sistemas de representación;GH_07_NX_LL;España
+138140;Desafío: Los ecosistemas y el medio ambiente;GH_07_NX_LL;España
+138159;Desafío: Los paisajes de la Tierra;GH_07_NX_LL;España
+138178;Desafío: Los ríos y mares de la Tierra;GH_07_NX_LL;España
+138197;Desafío: Primeras civilizaciones: Mesopotamia, Egipto y Fenicia;GH_07_NX_LL;España
+138244;Desafío: El sector primario;GH_09_NX_LL;España
+138263;Desafío: El sector secundario;GH_09_NX_LL;España
+138282;Desafío: El sector terciario;GH_09_NX_LL;España
+138301;Desafío: Europa y la Unión Europea;GH_09_NX_LL;España
+138321;Desafío: La organización política del mundo;GH_09_NX_LL;España
+138340;Desafío: La organización política y social de España;GH_09_NX_LL;España
+138359;Desafío: La población y los recursos;GH_09_NX_LL;España
+138378;Desafío: Las actividades económicas en España y Europa;GH_09_NX_LL;España
+138397;Desafío: Las actividades económicas y el territorio;GH_09_NX_LL;España
+138452;Desafío: El fin del Antiguo Régimen;GH_10_NX_LL;España
+138471;Desafío: El imperialismo y la Primera Guerra Mundial;GH_10_NX_LL;España
+138490;Desafío: El mundo después de la Segunda Guerra Mundial;GH_10_NX_LL;España
+138509;Desafío: El mundo reciente entre los siglos XX y XXI;GH_10_NX_LL;España
+138528;Desafío: El período de entreguerras;GH_10_NX_LL;España
+138547;Desafío: España desde la crisis de la Restauración a la Guerra Civil;GH_10_NX_LL;España
+138566;Desafío: España desde la guerra de la Independencia a la crisis del 98;GH_10_NX_LL;España
+138585;Desafío: España durante la dictadura y la democracia;GH_10_NX_LL;España
+138604;Desafío: La cultura y el arte de los siglos XIX y XX;GH_10_NX_LL;España
+138623;Desafío: La era de la globalización;GH_10_NX_LL;España
+138642;Desafío: La era de las revoluciones liberales;GH_10_NX_LL;España
+138661;Desafío: La Europa del siglo XVIII;GH_10_NX_LL;España
+138680;Desafío: La revolución industrial y el primer capitalismo;GH_10_NX_LL;España
+138699;Desafío: La Segunda Guerra Mundial;GH_10_NX_LL;España
+138718;Desafío: La sociedad industrial y sus ideologías;GH_10_NX_LL;España
+138771;Desafío: El clima y el paisaje;MS_05_NX_LL;España
+138790;Desafío: El planeta Tierra;MS_05_NX_LL;España
+138809;Desafío: El relieve y la hidrografía;MS_05_NX_LL;España
+138828;Desafío: El relieve, ríos y costas de España;MS_05_NX_LL;España
+138847;Desafío: El universo;MS_05_NX_LL;España
+138866;Desafío: Introducción a la historia;MS_05_NX_LL;España
+138885;Desafío: La educación vial;MS_05_NX_LL;España
+138904;Desafío: La historia antigua de España;MS_05_NX_LL;España
+138923;Desafío: La historia medieval de España;MS_05_NX_LL;España
+138942;Desafío: La prehistoria;MS_05_NX_LL;España
+138961;Desafío: Las capas de la Tierra;MS_05_NX_LL;España
+138980;Desafío: Los climas y paisajes de España;MS_05_NX_LL;España
+138999;Desafío: Los sistemas de representación del espacio;MS_05_NX_LL;España
+139085;Desafío: El relieve, ríos y costas de Europa;MS_06_NX_LL;España
+139104;Desafío: La historia contemporánea de España;MS_06_NX_LL;España
+139123;Desafío: La historia moderna de España;MS_06_NX_LL;España
+139142;Desafío: La intervención humana en el medio;MS_06_NX_LL;España
+139161;Desafío: La organización política de España;MS_06_NX_LL;España
+139180;Desafío: La organización política de Europa;MS_06_NX_LL;España
+139200;Desafío: La población;MS_06_NX_LL;España
+139219;Desafío: La vida económica;MS_06_NX_LL;España
+139238;Desafío: Los climas y paisajes de Europa;MS_06_NX_LL;España
+139257;Desafío: Los sectores económicos;MS_06_NX_LL;España
+139289;Desafío: El absolutismo (siglo XVII);GH_08_NX_LL;España
+139308;Desafío: La Alta Edad Media (siglos V-XI);GH_08_NX_LL;España
+139327;Desafío: La Baja Edad Media (siglos XIV-XV);GH_08_NX_LL;España
+139346;Desafío: La ciudad y el proceso de urbanización;GH_08_NX_LL;España
+139365;Desafío: La cultura y el arte en la Edad Media;GH_08_NX_LL;España
+139384;Desafío: La organización política y territorial de España, Europa y el mundo;GH_08_NX_LL;España
+139403;Desafío: La península Ibérica en la Alta Edad Media;GH_08_NX_LL;España
+139423;Desafío: La península Ibérica en la Baja Edad Media;GH_08_NX_LL;España
+139442;Desafío: La península Ibérica en la Plena Edad Media;GH_08_NX_LL;España
+139461;Desafío: La Plena Edad Media (siglos XI-XIII);GH_08_NX_LL;España
+139480;Desafío: La población en el mundo;GH_08_NX_LL;España
+139499;Desafío: La población en España y Europa;GH_08_NX_LL;España
+139518;Desafío: Las monarquías autoritarias y los Imperios (siglo XVI);GH_08_NX_LL;España
+139537;Desafío: Los inicios de la historia moderna (siglo XV);GH_08_NX_LL;España
