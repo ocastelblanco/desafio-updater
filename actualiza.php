@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('America/Bogota');
+
 // Constantes generales
 const  BACKUP_FOLDER = __DIR__ . DIRECTORY_SEPARATOR . "backup" . DIRECTORY_SEPARATOR;
 //CONST ORIGEN = "Z:" . DIRECTORY_SEPARATOR . "CPCAN" . DIRECTORY_SEPARATOR . "global_assets" . DIRECTORY_SEPARATOR . "resource" . DIRECTORY_SEPARATOR;
@@ -48,9 +50,12 @@ foreach ($iterador as $fuente) {
   if (!$esPunto) array_push($listaFuentes, $fuente->getPathname());
 }
 
+debug("Inicia proceso de actualización de Desafios, con " . count($listaFuentes) . " fuentes de ajuste.", -1);
+
 // Itera entre las fuentes, extrae los recursos a intervenir y crea un listado de cambios editoriales.
 $listaCambios = [];
 foreach ($listaFuentes as $fuente) {
+  $countCambios = count($listaCambios);
   $gestor = fopen($fuente, "r");
   $num = 0;
   while (($fila = fgetcsv($gestor, null, ";")) !== false) { // Recorre cada línea del archivo fuente
@@ -62,7 +67,8 @@ foreach ($listaFuentes as $fuente) {
         $listaCambios[$id] = [
           "ruta" => $ruta,
           "cambiosEditoriales" => [],
-          "cambiosFijos" => $cambiosFijos
+          "cambiosFijos" => $cambiosFijos,
+          "fuente" => $fuente,
         ];
       }
       if (!array_key_exists($nomPag, $listaCambios[$id]["cambiosEditoriales"])) { // Si no existe la página, se crea
@@ -101,6 +107,7 @@ foreach ($listaFuentes as $fuente) {
     $num++;
   }
   fclose($gestor);
+  debug($fuente . ": " . (count($listaCambios) - $countCambios) . " recursos a intervenir", 0);
 }
 
 // Itera la lista de recursos para reemplazar los arrays de pag06 y secciones de pag04 por HTML completo (adiciona la etiqueta <ul>) en los cambios editoriales
@@ -133,48 +140,56 @@ foreach ($listaCambios as &$recurso) {
   $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"]["replacement"] = $pag04sec04inglesReplacement;
   $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"]["pattern"] = '/(<p>.*<strong>.*Si.+te.+atreves.+con.+el.+inglés,.+consulta.*<\/strong>.*).*?(<\/p>)/s';
 }
-debug("Se inicia el ciclo de aplicación de cambios" . "\n");
+
 // Itera la lista de recursos y aplica los cambios <------------- Cambios sobre archivos y carpetas
+debug("Se inicia el ciclo de aplicación de " . count($listaCambios) . " cambios en total.", -1);
 $zip = new ZipArchive;
 foreach ($listaCambios as $idRecurso => $cambio) {
-  debug("└─ Realizando cambios al recurso $idRecurso" . "\n");
+  debug("Realizando cambios al recurso $idRecurso", 1);
   // Copia el ZIP para tenerlo de backup.
   $destino = creaDirs(getRutaRecurso($idRecurso, false), BACKUP_FOLDER) . NOMBRE_ZIP;
+  debug("Creando copia de seguridad del archivo $destino", 2);
   if (file_exists($destino)) {
-    debug(" └─ La copia de seguridad ya existe" . "\n");
+    debug("No se creó una copia de seguridad, ya existe.", 3);
   } else {
     copy($cambio["ruta"], $destino);
-    debug(" └─ Creando copia de seguridad del ZIP original" . "\n");
+    debug("Se creó una copia de seguridad del ZIP original.", 3);
   }
   // Se abre el ZIP en la carpeta destino
   $zip->open($cambio["ruta"]);
   // --------- Efectúa los cambios fijos
+  debug("Realizando cambios comunes", 2);
   // Reemplazos de archivos
   $reemplazar = $cambio["cambiosFijos"]["archivos"]["reemplazar"];
+  debug("Se reemplazarán " . count($reemplazar) . " archivos en el ZIP original.", 3);
   foreach ($reemplazar as $replace) {
     $idRep = $zip->locateName(ltrim($replace, "/"));
     $filePath = RUTA_MODELO . ltrim($replace, "/");
     $zip->replaceFile($filePath, $idRep);
-    debug(" └─ Reemplazando archivo $replace" . "\n");
+    debug("Reemplazando archivo $replace", 4);
   }
   // Eliminación de archivos
   $eliminar = $cambio["cambiosFijos"]["archivos"]["eliminar"];
+  debug("Se eliminarán " . count($eliminar) . " patrones de archivos en el ZIP.", 3);
   foreach ($eliminar as $elimina) {
     eliminaPorNombre($zip, $elimina);
   }
   // Cambios de texto en vistas
   $contenidos = $cambio["cambiosFijos"]["contenidos"];
+  debug("Se reemplazarán textos en " . count($contenidos) . " vistas.", 3);
   foreach ($contenidos as $contenido) {
     $rutaCont = $contenido["ruta"] . $contenido["nombre"];
-    debug(" └─ Cambiando texto en $rutaCont" . "\n");
+    debug("Cambiando texto en $rutaCont.", 4);
     $subject = $zip->getFromName($rutaCont);
     $reempCont = $contenido["reemplazos"];
     $ciclo = 0;
+    debug("Se harán " . count($reempCont) . " reemplazos de texto.", 5);
     foreach ($reempCont as $repCont) {
       $ciclo++;
       $subject = preg_replace($repCont["pattern"], $repCont["replacement"], $subject, -1, $countR);
-      debug("   └─ Reemplazo $ciclo: $countR" . "\n");
+      debug("Reemplazando texto número $ciclo: " . ($countR == 1 ? "OK" : "ERROR"), 6);
     }
+    debug("Se reemplaza el HTML original con el HTML resultado de los cambios.", 5);
     $zip->deleteName($rutaCont);
     $zip->addFromString($rutaCont, $subject, ZipArchive::OVERWRITE);
   }
@@ -223,17 +238,19 @@ function eliminaPorNombre($zip, $extension)
       $nombreArchivo = array_pop($componentes);
       if (preg_match($pattern, $nombreArchivo) && $componentes == []) {
         $zip->deleteName($nombreArchivo);
-        debug(" └─ Borrando $nombreArchivo" . "\n");
+        debug("Borrando $nombreArchivo", 4);
       }
     }
     return;
   }
-  debug(" └─ Borrando $extension" . "\n");
+  debug("Borrando $extension", 4);
   $zip->deleteName($extension);
 }
-function debug($texto)
+function debug($texto, $nivel)
 {
   $fechaHora = new DateTime();
   $timestampISO = $fechaHora->format(DateTime::ATOM);
-  file_put_contents("debug.txt", $timestampISO . " :: " . $texto, FILE_APPEND);
+  $salida = $timestampISO . (($nivel < 0) ? " " : str_repeat(" ", $nivel) . " └─ ") . $texto . PHP_EOL;
+  file_put_contents("debug.txt", $salida, FILE_APPEND);
+  if ($nivel < 4) print $salida;
 }
