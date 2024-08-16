@@ -1,0 +1,54 @@
+.view-pag03 .contenido .seccion .hilo .aspectos>.aspecto.asp1 {
+    top: -0.1rem;
+    left: .7rem;
+}
+.view-pag03 .contenido .seccion .hilo .aspectos>.aspecto.asp2 {
+    top: 0rem;
+    left: 4.9rem;
+}
+.view-pag03 .contenido .seccion .hilo .aspectos>.aspecto.asp3 {
+    top: 2.33rem;
+    left: 1.76rem;
+}
+.view-pag03 .contenido .seccion .hilo .aspectos>.aspecto.asp4 {
+    top: 1.32rem;
+    left: 3.8rem;
+}
+.view-pag03 .contenido .seccion .hilo .aspectos>.aspecto.asp5 {
+    top: .59rem;
+    left: 1.8rem;
+}
+.view-pag03 .contenido .seccion .hilo .aspectos>.aspecto.asp6 {
+    top: 1.65rem;
+    left: .15rem;
+}
+.view-pag03 .contenido .seccion .hilo .aspectos>.aspecto.asp7 {
+    top: -.45rem;
+    left: 3.6rem;
+}
+.view-pag03 .contenido .seccion .hilo .aspectos>.aspecto.asp8 {
+    top: 1.65rem;
+    left: 4.96rem;
+}
+.view-pag07 .contenido .seccion.una-imagen .contenedor h3.texto-resaltado {
+    position: absolute;
+    top: -0.2rem;
+    font-size: 0.23rem;
+    z-index: 13;
+}
+.view-pag07 .contenido .seccion.una-imagen .contenedor p.texto {
+    position: absolute;
+    top: .5rem;
+    z-index: 12;
+}
+.view-pag07 .contenido .seccion.una-imagen .contenedor figure {
+    left: 4.75rem;
+}
+.view-pag07 .contenido .seccion.una-imagen .contenedor figure img {
+    top: 3.2rem;
+    width: 4.7rem;
+    left: -4.91rem;
+}
+.view-pag07 .contenido .seccion.una-imagen .contenedor figure figcaption {
+    font-size: .36rem;
+}

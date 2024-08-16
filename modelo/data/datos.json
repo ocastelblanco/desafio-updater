@@ -1,0 +1,86 @@
+{
+	"asignatura": "cn",
+	"desafio": "Desafío",
+	"tema": "Los seres vivos",
+	"contenido": [
+		{
+			"titulo": "Comienza la aventura"
+		},
+		{
+			"titulo": "En tus manos"
+		},
+		{
+			"titulo": "Tira del hilo"
+		},
+		{
+			"titulo": "Escoge tu camino"
+		},
+		{
+			"titulo": "Dale forma"
+		},
+		{
+			"titulo": "Ve más allá"
+		},
+		{
+			"titulo": "Ponte a prueba"
+		},
+		{
+			"titulo": "Meta"
+		}
+	],
+	"assets": [
+		"./int/1-Boton-cn.svg",
+		"./int/1-Boton-fq.svg",
+		"./int/2-Boton-cn.svg",
+		"./int/2-Boton-fq.svg",
+		"./int/3-Boton-cn.svg",
+		"./int/3-Boton-fq.svg",
+		"./int/4-Boton-cn.svg",
+		"./int/4-Boton-fq.svg",
+		"./int/5-Boton-cn.svg",
+		"./int/5-Boton-fq.svg",
+		"./int/6-Boton-cn.svg",
+		"./int/6-Boton-fq.svg",
+		"./int/7-Boton-cn.svg",
+		"./int/7-Boton-fq.svg",
+		"./int/8-Boton-cn.svg",
+		"./int/8-Boton-fq.svg",
+		"./int/fondo_pag01.jpg",
+		"./int/fondo_pag02.jpg",
+		"./int/fondo_pag03.jpg",
+		"./int/fondo_pag04_sec01.jpg",
+		"./int/fondo_pag04_sec02.jpg",
+		"./int/fondo_pag04_sec03.jpg",
+		"./int/fondo_pag05.jpg",
+		"./int/fondo_pag06.jpg",
+		"./int/fondo_pag07.jpg",
+		"./int/fondo_pag08.jpg",
+		"./int/portada_cn.jpg",
+		"./int/portada_fq.jpg",
+		"./int/icono_ra.png",
+		"./int/portada_cs.jpg",
+		"./int/1-Boton-cs.svg",
+		"./int/1-Icono.svg",
+		"./int/2-Boton-cs.svg",
+		"./int/2-Icono.svg",
+		"./int/3-Boton-cs.svg",
+		"./int/3-Icono.svg",
+		"./int/4-Boton-cs.svg",
+		"./int/4-Icono.svg",
+		"./int/5-Boton-cs.svg",
+		"./int/5-Icono.svg",
+		"./int/6-Boton-cs.svg",
+		"./int/6-Icono.svg",
+		"./int/7-Boton-cs.svg",
+		"./int/7-Icono.svg",
+		"./int/8-Boton-cs.svg",
+		"./int/8-Icono.svg",
+		"./int/ant-act.svg",
+		"./int/ant-des.svg",
+		"./int/boton-sombra.svg",
+		"./int/logoPlaneta.svg",
+		"./int/sig-act.svg",
+		"./int/sig-des.svg",
+		"./int/volver.svg"
+	]
+}

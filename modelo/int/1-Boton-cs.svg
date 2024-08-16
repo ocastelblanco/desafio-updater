@@ -1,0 +1,143 @@
+<svg version="1.1" id="_x31_-Boton" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+     y="0px" viewBox="0 0 87.5 87.5" style="enable-background:new 0 0 87.5 87.5;" xml:space="preserve">
+    <style type="text/css">
+        .st0{filter:url(#Adobe_OpacityMaskFilter);}
+        .st1{mask:url(#_x31_._Sombra_1_);}
+        .st2{opacity:0.41;clip-path:url(#SVGID_4_);}
+        .st3{clip-path:url(#SVGID_6_);fill:url(#SVGID_7_);}
+        .st4{filter:url(#Adobe_OpacityMaskFilter_1_);}
+        .st5{mask:url(#SVGID_8_);}
+        .st6{opacity:0.75;clip-path:url(#SVGID_12_);}
+        .st7{fill:#D0CCE3;}
+        .st8{fill:none;stroke:#776DB0;stroke-width:6;stroke-linecap:round;stroke-miterlimit:10;}
+        .st9{filter:url(#Adobe_OpacityMaskFilter_2_);}
+        .st10{mask:url(#SVGID_13_);}
+        .st11{opacity:0.75;clip-path:url(#SVGID_17_);}
+    </style>
+    <g id="_x31_._Boton">
+        <defs>
+            <filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="0.5" y="0.5" width="87" height="87">
+                <feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+            </filter>
+        </defs>
+        <g id="_x31_._Fondo_1_">
+            <defs>
+                <path id="SVGID_5_" d="M0,38c0,21,17,38,38,38c21,0,38-17,38-38S59,0,38,0C17,0,0,17,0,38"/>
+            </defs>
+            <clipPath id="SVGID_6_">
+                <use xlink:href="#SVGID_5_"  style="overflow:visible;"/>
+            </clipPath>
+
+            <linearGradient id="SVGID_7_" gradientUnits="userSpaceOnUse" x1="-283.0593" y1="270.601" x2="-282.0593" y2="270.601" gradientTransform="matrix(973.5189 -649.2564 -649.2564 -973.5189 451025.3438 79872.3281)">
+                <stop  offset="0" style="stop-color:#FFFFFF"/>
+                <stop  offset="4.909090e-03" style="stop-color:#FFFFFF"/>
+                <stop  offset="0.4964" style="stop-color:#DBD2C5"/>
+                <stop  offset="0.9994" style="stop-color:#B9A78D"/>
+                <stop  offset="1" style="stop-color:#B9A78D"/>
+            </linearGradient>
+            <polygon class="st3" points="-35.1,23.4 52.6,-35.1 111,52.6 23.4,111 		"/>
+        </g>
+        <g id="_x31_._Icono">
+            <defs>
+                <filter id="Adobe_OpacityMaskFilter_1_" filterUnits="userSpaceOnUse" x="14.3" y="15.9" width="50" height="50">
+                    <feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+                </filter>
+            </defs>
+            <mask maskUnits="userSpaceOnUse" x="14.3" y="15.9" width="50" height="50" id="SVGID_8_">
+                <g class="st4">
+                    <g>
+                        <defs>
+                            <rect id="SVGID_9_" x="4.3" y="7.9" width="72" height="64"/>
+                        </defs>
+                        <clipPath id="SVGID_10_">
+                            <use xlink:href="#SVGID_9_"  style="overflow:visible;"/>
+                        </clipPath>
+                        <g style="clip-path:url(#SVGID_10_);">
+
+                            <image style="overflow:visible;" width="72" height="64" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/7AARRHVja3kAAQAEAAAAHgAA/+4AIUFkb2JlAGTAAAAAAQMA
+                                                                                                EAMCAwYAAAHyAAACnAAAA83/2wCEABALCwsMCxAMDBAXDw0PFxsUEBAUGx8XFxcXFx8eFxoaGhoX
+                                                                                                Hh4jJSclIx4vLzMzLy9AQEBAQEBAQEBAQEBAQEABEQ8PERMRFRISFRQRFBEUGhQWFhQaJhoaHBoa
+                                                                                                JjAjHh4eHiMwKy4nJycuKzU1MDA1NUBAP0BAQEBAQEBAQEBAQP/CABEIAEEASQMBIgACEQEDEQH/
+                                                                                                xACSAAACAgMBAAAAAAAAAAAAAAAABwQGAQIDBQEBAAAAAAAAAAAAAAAAAAAAABAAAQIGAgIDAQAA
+                                                                                                AAAAAAAABQMEABABAhQGNAcgQDAREzMRAAECAwMICAcAAAAAAAAAAAECAwARBBCSMyAhQXESshNz
+                                                                                                MVFhgSIyQlIwkbFyIxQFEgEAAAAAAAAAAAAAAAAAAABA/9oADAMBAAIRAxEAAAClx+kc6E6+C1G7
+                                                                                                4wuyRDOl+XrAKPvpbC+TzIYyHjJ19KUrTAX7AKPdKX6A5889zIAKtlpUhMBfsAo8eRHLcxEb0HzA
+                                                                                                TsYsNbAGAv2AWLUAAAAAA9AD/9oACAECAAEFAPZ//9oACAEDAAEFAPZ//9oACAEBAAEFACDhej/I
+                                                                                                cRkOIyHEZDiMhxGQ4jIcRkOI/RSCHPgQDfF1hvXQ1Gyul6/Wwp1w0UsJC3gxeZDnjGCpB6HEtxTO
+                                                                                                eyAkDDFygo2XkQ5/WzO1R/474ztbHJEOf1mtbRfx7EWtUNSIc/WCtRRVFZNdKb54ixal395EhIhz
+                                                                                                41XdFBlGRgc/s/Sz6InhY5PZ9tcGb5kOfJJdZGtS5OtqiqqlfBT+nw//2gAIAQICBj8AT//aAAgB
+                                                                                                AwIGPwBP/9oACAEBAQY/AKkBxcuK56j7jGKu8YxV3jGKu8YxV3jGKu8YxV3jGKu8YxV3jHmPzMVP
+                                                                                                Oc3jYGqVE0+pegQlVaovueoDMmNn9YDt0wpf89wtuDOEK6ILFU2UKHQdB1ZFTznN4w1SNCanCAT2
+                                                                                                QimYSAQPErSTkLQpI46QS2vTMQthwSW2SD3W1POc3jD1SoT4SfDrOUtSBJLo2u+2p5zm8YqWSc5A
+                                                                                                IyggZyhInbU85zeMNPk/jUdlzUYS60QpCwCCMhypeUEobBOeHqtRxFGWq2p5zm8bE0lbNym6ArSm
+                                                                                                AumfSqeiciO6PMJdc4K330zA8gM1GOC1NukScyfdryKnnObxtm0tSD1gyjZNS5s/cY2nFlR6yZ5K
+                                                                                                tZ+vwv/Z" transform="matrix(1 0 0 1 4.3115 7.8942)">
+                            </image>
+                        </g>
+                    </g>
+                </g>
+            </mask>
+            <g class="st5">
+                <g>
+                    <defs>
+                        <rect id="SVGID_11_" x="14.3" y="15.9" width="50" height="50"/>
+                    </defs>
+                    <clipPath id="SVGID_12_">
+                        <use xlink:href="#SVGID_11_"  style="overflow:visible;"/>
+                    </clipPath>
+                    <rect x="14.3" y="15.9" class="st6" width="50" height="50"/>
+                </g>
+            </g>
+            <path class="st7" d="M37.9,60c11.3,0,20.5-9.2,20.5-20.5c0-11.3-9.2-20.5-20.5-20.5s-20.5,9.2-20.5,20.5
+                                 C17.4,50.8,26.6,60,37.9,60"/>
+            <circle class="st8" cx="37.9" cy="39.5" r="20.5"/>
+            <g>
+                <defs>
+                    <filter id="Adobe_OpacityMaskFilter_2_" filterUnits="userSpaceOnUse" x="34.7" y="15.9" width="9" height="29">
+                        <feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+                    </filter>
+                </defs>
+                <mask maskUnits="userSpaceOnUse" x="34.7" y="15.9" width="9" height="29" id="SVGID_13_">
+                    <g class="st9">
+                        <g>
+                            <defs>
+                                <rect id="SVGID_14_" x="24.7" y="7.9" width="32" height="43"/>
+                            </defs>
+                            <clipPath id="SVGID_15_">
+                                <use xlink:href="#SVGID_14_"  style="overflow:visible;"/>
+                            </clipPath>
+                            <g style="clip-path:url(#SVGID_15_);">
+
+                                <image style="overflow:visible;" width="32" height="43" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/7AARRHVja3kAAQAEAAAAHgAA/+4AIUFkb2JlAGTAAAAAAQMA
+                                                                                                    EAMCAwYAAAGqAAAB9QAAApH/2wCEABALCwsMCxAMDBAXDw0PFxsUEBAUGx8XFxcXFx8eFxoaGhoX
+                                                                                                    Hh4jJSclIx4vLzMzLy9AQEBAQEBAQEBAQEBAQEABEQ8PERMRFRISFRQRFBEUGhQWFhQaJhoaHBoa
+                                                                                                    JjAjHh4eHiMwKy4nJycuKzU1MDA1NUBAP0BAQEBAQEBAQEBAQP/CABEIACwAIQMBIgACEQEDEQH/
+                                                                                                    xACEAAADAQEAAAAAAAAAAAAAAAAABQYEAwEBAAAAAAAAAAAAAAAAAAAAABAAAAQGAgMAAAAAAAAA
+                                                                                                    AAAAAAQFBhADFDUmBzA0ARUWEQABAgIIBQUAAAAAAAAAAAABAAISAxARcpITMwQFIaOzdEUxQVFT
+                                                                                                    FBIBAAAAAAAAAAAAAAAAAAAAMP/aAAwDAQACEQMRAAAAksGxwTY4RnQ5gwqJeoF8vUS4ADDvuxGd
+                                                                                                    e4BOOA//2gAIAQIAAQUA4f/aAAgBAwABBQDh/9oACAEBAAEFAF+fP8LtQYFQYFQYFQYDgvzGRSaq
+                                                                                                    ddyYWTFmDgv2su7sK/wcF+1l3dhX+DgvzdX56EZWlacsHoLXy/ucSGJDEhiQ/9oACAECAgY/AB//
+                                                                                                    2gAIAQMCBj8AH//aAAgBAQEGPwDcgJjgBq54ADj9jlmvvFZr7xWa+8VmvvFbn3c/qOU0axsbJTaw
+                                                                                                    1TNPphDKIDg34rp3Pu5/UctTYCdYFO593P6jlqbATrAp3Pu5/UcnT5TQ9rxC5pT9ZNAaXcA0ewFO
+                                                                                                    vx/3436Z2LBgwR4jooYuNVfovI8heR5C8jyF5HkL/9k=" transform="matrix(1 0 0 1 24.7289 7.8942)">
+                                </image>
+                            </g>
+                        </g>
+                    </g>
+                </mask>
+                <g class="st10">
+                    <g>
+                        <defs>
+                            <rect id="SVGID_16_" x="34.7" y="15.9" width="9" height="29"/>
+                        </defs>
+                        <clipPath id="SVGID_17_">
+                            <use xlink:href="#SVGID_16_"  style="overflow:visible;"/>
+                        </clipPath>
+                        <rect x="34.7" y="15.9" class="st11" width="9" height="29"/>
+                    </g>
+                </g>
+            </g>
+            <line class="st8" x1="37.8" y1="19" x2="37.8" y2="39"/>
+        </g>
+    </g>
+</svg>
