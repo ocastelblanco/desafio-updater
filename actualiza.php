@@ -2,6 +2,8 @@
 
 date_default_timezone_set('America/Bogota');
 
+$dry = in_array("--dry", $argv);
+
 // Constantes generales
 const  BACKUP_FOLDER = __DIR__ . DIRECTORY_SEPARATOR . "backup" . DIRECTORY_SEPARATOR;
 //CONST ORIGEN = "Z:" . DIRECTORY_SEPARATOR . "CPCAN" . DIRECTORY_SEPARATOR . "global_assets" . DIRECTORY_SEPARATOR . "resource" . DIRECTORY_SEPARATOR;
@@ -118,11 +120,15 @@ foreach ($listaCambios as &$recurso) {
   $recurso["cambiosEditoriales"]["pag06"] = [];
   $recurso["cambiosEditoriales"]["pag06"]["replacement"] = $pag06replacement;
   $recurso["cambiosEditoriales"]["pag06"]["pattern"] = '/<ul>.*?<\/ul>/s';
-  // Para pag08
-  $pag08replacement = "$1" . remueveTag($recurso["cambiosEditoriales"]["pag08"], "strong") . "$2";
+  // Para pag08, se tienen que crear 2 <h3 class="texto-resaltado">
+  $pag08replacement = preg_replace(
+    '/(.*)\n?(¿Serás[^\?]+\?)/i',
+    "<h3 class=\"texto-resaltado\">$1</h3>\n<h3 class=\"texto-resaltado\">$2</h3>",
+    remueveTag($recurso["cambiosEditoriales"]["pag08"], "strong")
+  );
   $recurso["cambiosEditoriales"]["pag08"] = [];
   $recurso["cambiosEditoriales"]["pag08"]["replacement"] = $pag08replacement;
-  $recurso["cambiosEditoriales"]["pag08"]["pattern"] = '/(<h3\s+class="texto-resaltado">).+(<\\/h3>)/s';
+  $recurso["cambiosEditoriales"]["pag08"]["pattern"] = '/<h3\s+class="texto-resaltado">[^<]*<\/h3>\s*<h3\s+class="texto-resaltado">[^<]*<\/h3>/s';
   // Para pag04
   // sec01
   $pag04sec01replacement = "$1<ul>\n" . implode("\n", $recurso["cambiosEditoriales"]["pag04"]["sec01"]) . "\n</ul>";
@@ -152,7 +158,7 @@ foreach ($listaCambios as $idRecurso => $cambio) {
   if (file_exists($destino)) {
     debug("No se creó una copia de seguridad, ya existe.", 3);
   } else {
-    copy($cambio["ruta"], $destino);
+    if (!$dry) copy($cambio["ruta"], $destino);
     debug("Se creó una copia de seguridad del ZIP original.", 3);
   }
   // Se abre el ZIP en la carpeta destino
@@ -165,7 +171,7 @@ foreach ($listaCambios as $idRecurso => $cambio) {
   foreach ($reemplazar as $replace) {
     $idRep = $zip->locateName(ltrim($replace, "/"));
     $filePath = RUTA_MODELO . ltrim($replace, "/");
-    $zip->replaceFile($filePath, $idRep);
+    if (!$dry) $zip->replaceFile($filePath, $idRep);
     debug("Reemplazando archivo $replace", 4);
   }
   // Eliminación de archivos
@@ -190,8 +196,8 @@ foreach ($listaCambios as $idRecurso => $cambio) {
       debug("Reemplazando texto número $ciclo: " . ($countR == 1 ? "OK" : "ERROR"), 6);
     }
     debug("Se reemplaza el HTML original con el HTML resultado de los cambios.", 5);
-    $zip->deleteName($rutaCont);
-    $zip->addFromString($rutaCont, $subject, ZipArchive::OVERWRITE);
+    if (!$dry) $zip->deleteName($rutaCont);
+    if (!$dry) $zip->addFromString($rutaCont, $subject, ZipArchive::OVERWRITE);
   }
   // Se cierra el ZIP.
   $zip->close();
@@ -225,26 +231,28 @@ function remueveTag($texto, $tag)
 }
 function creaDirs($ruta, $destino)
 {
+  global $dry;
   $rutaCompleta = rtrim($destino, '/') . '/' . ltrim($ruta, '/');
-  if (!file_exists($rutaCompleta)) mkdir($rutaCompleta, 0777, true);
+  if (!file_exists($rutaCompleta) && !$dry) mkdir($rutaCompleta, 0777, true);
   return $rutaCompleta;
 }
 function eliminaPorNombre($zip, $extension)
 {
+  global $dry;
   if (str_contains($extension, "*")) {
     $pattern = '/' . preg_quote(trim($extension, '*'), '/') . '$/i';
     for ($i = 0; $i < $zip->numFiles; $i++) {
       $componentes = explode("/", $zip->getNameIndex($i));
       $nombreArchivo = array_pop($componentes);
       if (preg_match($pattern, $nombreArchivo) && $componentes == []) {
-        $zip->deleteName($nombreArchivo);
+        if (!$dry) $zip->deleteName($nombreArchivo);
         debug("Borrando $nombreArchivo", 4);
       }
     }
     return;
   }
   debug("Borrando $extension", 4);
-  $zip->deleteName($extension);
+  if (!$dry) $zip->deleteName($extension);
 }
 function debug($texto, $nivel)
 {

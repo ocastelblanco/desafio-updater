@@ -39,8 +39,8 @@
       "nombre": "pag06.html",
       "reemplazos": [
         {
-          "pattern": "/(<h3\\s*class=\"texto-resaltado\">Ahora.*que.*ya.*.*?tema,\\s)[^<]+(<\\/h3>)/i",
-          "replacement": "$1aplica tus dotes para profundizar en otros aspectos relacionados con este.$2"
+          "pattern": "/(<h3\\s*class=\"texto-resaltado\">)A?hora(.*que.*ya.*.*?tema,\\s)[^<]+(<\\/h3>)/i",
+          "replacement": "$1Ahora$2aplica tus dotes para profundizar en otros aspectos relacionados con este.$3"
         },
         {
           "pattern": "/Recuerda.+que.+dispones.+de.+los.+recursos.+[^>]+>Cuaderno.+de.+aprendizaje<\\/a>:/i",
