@@ -1,13 +1,21 @@
 <?php
 
+// Funciones para compatibilidad backward
+if (!function_exists('str_contains')) {
+  function str_contains($haystack, $needle)
+  {
+    return $needle !== '' && mb_strpos($haystack, $needle) !== false;
+  }
+}
+
 date_default_timezone_set('America/Bogota');
 
 $dry = in_array("--dry", $argv);
 
 // Constantes generales
 const  BACKUP_FOLDER = __DIR__ . DIRECTORY_SEPARATOR . "backup" . DIRECTORY_SEPARATOR;
-//CONST ORIGEN = "Z:" . DIRECTORY_SEPARATOR . "CPCAN" . DIRECTORY_SEPARATOR . "global_assets" . DIRECTORY_SEPARATOR . "resource" . DIRECTORY_SEPARATOR;
-const ORIGEN = __DIR__ . DIRECTORY_SEPARATOR . "origen" . DIRECTORY_SEPARATOR;
+const ORIGEN = "Z:" . DIRECTORY_SEPARATOR . "CPCAN" . DIRECTORY_SEPARATOR . "global_assets" . DIRECTORY_SEPARATOR . "resource" . DIRECTORY_SEPARATOR;
+//const ORIGEN = __DIR__ . DIRECTORY_SEPARATOR . "origen" . DIRECTORY_SEPARATOR;
 const FUENTES = __DIR__ . DIRECTORY_SEPARATOR . "fuentes" . DIRECTORY_SEPARATOR;
 const NOMBRE_ZIP = "_resource_content.zip";
 const RUTA_MODELO = __DIR__ . DIRECTORY_SEPARATOR . "modelo" . DIRECTORY_SEPARATOR;
