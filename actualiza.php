@@ -14,8 +14,8 @@ $dry = in_array("--dry", $argv);
 
 // Constantes generales
 const  BACKUP_FOLDER = __DIR__ . DIRECTORY_SEPARATOR . "backup" . DIRECTORY_SEPARATOR;
-const ORIGEN = "Z:" . DIRECTORY_SEPARATOR . "CPCAN" . DIRECTORY_SEPARATOR . "global_assets" . DIRECTORY_SEPARATOR . "resource" . DIRECTORY_SEPARATOR;
-//const ORIGEN = __DIR__ . DIRECTORY_SEPARATOR . "origen" . DIRECTORY_SEPARATOR;
+//const ORIGEN = "Z:" . DIRECTORY_SEPARATOR . "CPCAN" . DIRECTORY_SEPARATOR . "global_assets" . DIRECTORY_SEPARATOR . "resource" . DIRECTORY_SEPARATOR;
+const ORIGEN = __DIR__ . DIRECTORY_SEPARATOR . "origen" . DIRECTORY_SEPARATOR;
 const FUENTES = __DIR__ . DIRECTORY_SEPARATOR . "fuentes" . DIRECTORY_SEPARATOR;
 const NOMBRE_ZIP = "_resource_content.zip";
 const RUTA_MODELO = __DIR__ . DIRECTORY_SEPARATOR . "modelo" . DIRECTORY_SEPARATOR;
@@ -127,7 +127,7 @@ foreach ($listaCambios as &$recurso) {
   $pag06replacement = "<ul>\n" . implode("\n", $recurso["cambiosEditoriales"]["pag06"]) . "\n</ul>";
   $recurso["cambiosEditoriales"]["pag06"] = [];
   $recurso["cambiosEditoriales"]["pag06"]["replacement"] = $pag06replacement;
-  $recurso["cambiosEditoriales"]["pag06"]["pattern"] = '/<ul>.*?<\/ul>/s';
+  $recurso["cambiosEditoriales"]["pag06"]["pattern"] = '/<ul>.*?<\/ul-{0,2}>/s';
   // Para pag08, se tienen que crear 2 <h3 class="texto-resaltado">
   $pag08replacement = preg_replace(
     '/(.*)\n?(¿Serás[^\?]+\?)/i',
@@ -142,24 +142,34 @@ foreach ($listaCambios as &$recurso) {
   $pag04sec01replacement = "$1<ul>\n" . implode("\n", $recurso["cambiosEditoriales"]["pag04"]["sec01"]) . "\n</ul>";
   $recurso["cambiosEditoriales"]["pag04"]["sec01"] = [];
   $recurso["cambiosEditoriales"]["pag04"]["sec01"]["replacement"] = $pag04sec01replacement;
-  $recurso["cambiosEditoriales"]["pag04"]["sec01"]["pattern"] = '/(<p>.*<strong>.*Propón.+uno.+o.+escoge.+entre.+los.+siguientes:.*<\/strong>.*<\/p>.*)<ul>.*?<\/ul>/s';
+  $recurso["cambiosEditoriales"]["pag04"]["sec01"]["pattern"] = '/(<p>.*<strong>.*Propón\s+uno\s+o\s+escoge[^:]+:\s*<\/strong>\s*<\/p>\s*)<ul>.*?<\/ul>/s';
   // sec04_enlaces
   $pag04sec04enlacesReplacement = "$1<ul>\n" . implode("\n", $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"]) . "\n</ul>";
   $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"] = [];
   $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"]["replacement"] = $pag04sec04enlacesReplacement;
-  $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"]["pattern"] = '/(<p>.*<strong>.*Para.+tener.+una.+visión.+general.+sobre.+el.+tema,.+consulta.+estos.+enlaces:.*<\/strong>.*<\/p>).*<ul>.*?<\/ul>/s';
-  // sec04_ingles
-  $pag04sec04inglesReplacement = "$1" . $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"] . "$2";
-  $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"] = [];
-  $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"]["replacement"] = $pag04sec04inglesReplacement;
-  $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"]["pattern"] = '/(<p>.*<strong>.*Si.+te.+atreves.+con.+el.+inglés,.+consulta.*<\/strong>.*).*?(<\/p>)/s';
+  $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"]["pattern"] = '/(<h3\s*class="texto-resaltado">¿Qu.*?Internet\?<\/h3>\s*<div\s*class="texto">\s*<p>\s*(<strong>)?\s*[^:]+:\s*(<\/strong>)?\s*<\/p>\s*)<ul>.*?<\/ul>/s';
+  // sec04_ingles 
+  if (array_key_exists("sec04_ingles", $recurso["cambiosEditoriales"]["pag04"])) { // Si existe la clave "sec04_ingles"
+    $pag04sec04inglesReplacement = "$1" . $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"] . "$2";
+    $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"] = [];
+    $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"]["replacement"] = $pag04sec04inglesReplacement;
+    $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"]["pattern"] = '/(<p>\s*<strong>\s*Si\s+te\s+atreves\s+con\s+[^<]*<\/strong>\s*).*?(<\/p>)/s';
+  } else {
+    debug("ERROR: No existe sección Inglés en el recurso " . $recurso["ruta"], 2);
+  }
 }
 
 // Itera la lista de recursos y aplica los cambios <------------- Cambios sobre archivos y carpetas
 debug("Se inicia el ciclo de aplicación de " . count($listaCambios) . " cambios en total.", -1);
 $zip = new ZipArchive;
 foreach ($listaCambios as $idRecurso => $cambio) {
-  debug("Realizando cambios al recurso $idRecurso", 1);
+  $identificador = findPorID($idRecurso, $indice);
+  debug("Realizando cambios al asset $identificador", 1);
+  $rutaRecursoZIP = ORIGEN . getRutaRecurso($idRecurso, true);
+  if (!file_exists($rutaRecursoZIP)) {
+    debug("ERROR: No existe el recurso en la ruta $rutaRecursoZIP. Se continuará con el siguiente recurso.", 1);
+    continue;
+  }
   // Copia el ZIP para tenerlo de backup.
   $destino = creaDirs(getRutaRecurso($idRecurso, false), BACKUP_FOLDER) . NOMBRE_ZIP;
   debug("Creando copia de seguridad del archivo $destino", 2);
@@ -177,18 +187,22 @@ foreach ($listaCambios as $idRecurso => $cambio) {
   $reemplazar = $cambio["cambiosFijos"]["archivos"]["reemplazar"];
   debug("Se reemplazarán " . count($reemplazar) . " archivos en el ZIP original.", 3);
   foreach ($reemplazar as $replace) {
-    $idRep = $zip->locateName(ltrim($replace, "/"));
-    $filePath = RUTA_MODELO . ltrim($replace, "/");
-    if (!$dry) $zip->replaceFile($filePath, $idRep);
-    debug("Reemplazando archivo $replace", 4);
+    $nomArchRemp = ltrim($replace, "/");
+    $idRep = $zip->locateName($nomArchRemp);
+    $filePath = RUTA_MODELO . $nomArchRemp;
+    $seReemp = true;
+    if (!$dry) {
+      // $seReemp = $zip->replaceFile($filePath, $idRep); --> solo para versiones PHP 8+ con PECL zip correctamente instaladas
+      //$seEliminaParaRemp = $zip->deleteIndex($idRep);
+      $seReemp = $zip->addFile($filePath, $nomArchRemp);
+    }
+    debug("Reemplazando archivo $replace: " . ($seReemp ? "OK" : "ERROR"), 4);
   }
   // Eliminación de archivos
   $eliminar = $cambio["cambiosFijos"]["archivos"]["eliminar"];
   debug("Se eliminarán " . count($eliminar) . " patrones de archivos en el ZIP.", 3);
-  foreach ($eliminar as $elimina) {
-    eliminaPorNombre($zip, $elimina);
-  }
-  // Cambios de texto en vistas
+  foreach ($eliminar as $elimina) eliminaPorNombre($zip, $elimina);
+  // Cambios fijos de texto en vistas
   $contenidos = $cambio["cambiosFijos"]["contenidos"];
   debug("Se reemplazarán textos en " . count($contenidos) . " vistas.", 3);
   foreach ($contenidos as $contenido) {
@@ -205,10 +219,37 @@ foreach ($listaCambios as $idRecurso => $cambio) {
     }
     debug("Se reemplaza el HTML original con el HTML resultado de los cambios.", 5);
     if (!$dry) $zip->deleteName($rutaCont);
-    if (!$dry) $zip->addFromString($rutaCont, $subject, ZipArchive::OVERWRITE);
+    if (!$dry) $zip->addFromString($rutaCont, $subject); //, ZipArchive::OVERWRITE); --> Solo para PHP 8+
+  }
+  // Cambios editoriales de texto en vistas
+  $contenidosEd = $cambio["cambiosEditoriales"];
+  debug("Se harán cambios editoriales en " . count($contenidosEd) . " vistas", 3);
+  foreach ($contenidosEd as $pag => $editorial) {
+    $rutaCont = "views/$pag.html";
+    debug("Cambiando texto editorial en $rutaCont.", 4);
+    $subject = $zip->getFromName($rutaCont);
+    if ($pag != "pag04") {
+      $subject = preg_replace($editorial["pattern"], $editorial["replacement"], $subject, -1, $countC);
+      debug("Reemplazo editorial: " . ($countC == 1 ? "OK" : "ERROR"), 5);
+      if ($pag == "pag06") debug($subject, 6);
+    } else {
+      debug("Se harán " . count($editorial) . " reemplazos editoriales en la vista $rutaCont.", 5);
+      foreach ($editorial as $sec => $cambioPag04) {
+        if (!$subject || !$cambioPag04["replacement"]) {
+          print $identificador . PHP_EOL;
+          print_r($editorial);
+          print PHP_EOL;
+        }
+        $subject = preg_replace($cambioPag04["pattern"], $cambioPag04["replacement"], $subject, -1, $countC);
+        debug("Reemplazo editorial en la sección $sec: " . ($countC == 1 ? "OK" : "ERROR"), 6);
+      }
+    }
+    if (!$dry) $zip->deleteName($rutaCont);
+    if (!$dry) $zip->addFromString($rutaCont, $subject); //, ZipArchive::OVERWRITE); --> Solo para PHP 8+
   }
   // Se cierra el ZIP.
   $zip->close();
+  debug("         ", -1);
 }
 
 
@@ -240,7 +281,7 @@ function remueveTag($texto, $tag)
 function creaDirs($ruta, $destino)
 {
   global $dry;
-  $rutaCompleta = rtrim($destino, '/') . '/' . ltrim($ruta, '/');
+  $rutaCompleta = rtrim($destino, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . ltrim($ruta, DIRECTORY_SEPARATOR);
   if (!file_exists($rutaCompleta) && !$dry) mkdir($rutaCompleta, 0777, true);
   return $rutaCompleta;
 }
@@ -253,14 +294,16 @@ function eliminaPorNombre($zip, $extension)
       $componentes = explode("/", $zip->getNameIndex($i));
       $nombreArchivo = array_pop($componentes);
       if (preg_match($pattern, $nombreArchivo) && $componentes == []) {
+        $seElimino = true;
         if (!$dry) $zip->deleteName($nombreArchivo);
-        debug("Borrando $nombreArchivo", 4);
+        debug("Borrando $nombreArchivo: " . ($seElimino ? "OK" : "ERROR"), 4);
       }
     }
     return;
   }
-  debug("Borrando $extension", 4);
+  $borraExt = true;
   if (!$dry) $zip->deleteName($extension);
+  debug("Borrando $extension: " . ($borraExt ? "OK" : "ERROR"), 4);
 }
 function debug($texto, $nivel)
 {
@@ -269,4 +312,12 @@ function debug($texto, $nivel)
   $salida = $timestampISO . (($nivel < 0) ? " " : str_repeat(" ", $nivel) . " └─ ") . $texto . PHP_EOL;
   file_put_contents("debug.txt", $salida, FILE_APPEND);
   if ($nivel < 4) print $salida;
+}
+function findPorID($id, $array)
+{
+  $resp = null;
+  foreach ($array as $el) {
+    if ($el["id"] == $id) $resp = "ID: " . $el["id"] . " | TITULO: " . $el["titulo"] . " | UNIDAD: " . $el["unidad"];
+  }
+  return $resp;
 }
