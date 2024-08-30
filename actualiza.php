@@ -178,6 +178,7 @@ foreach ($listaCambios as &$recurso) {
 // Itera la lista de recursos y aplica los cambios <------------- Cambios sobre archivos y carpetas
 debug("Se inicia el ciclo de aplicación de " . count($listaCambios) . " cambios en total.", -1);
 $zip = new ZipArchive;
+$conteo = 0;
 foreach ($listaCambios as $idRecurso => $cambio) {
   $identificador = findPorID($idRecurso, $indice);
   debug("Realizando cambios al asset $identificador", 1);
@@ -238,6 +239,8 @@ foreach ($listaCambios as $idRecurso => $cambio) {
     if (!$dry) $zip->addFromString($rutaCont, $subject); //, ZipArchive::OVERWRITE); --> Solo para PHP 8+
   }
   // Cambios editoriales de texto en vistas
+  $zip->close(); // Se cierra el ZIP porque PHP 7 no puede mantener la info persistente
+  $zip->open($cambio["ruta"]); // Vuelve y se abre
   $contenidosEd = $cambio["cambiosEditoriales"];
   debug("Se harán cambios editoriales en " . count($contenidosEd) . " vistas", 3);
   foreach ($contenidosEd as $pag => $editorial) {
@@ -264,6 +267,8 @@ foreach ($listaCambios as $idRecurso => $cambio) {
   // Se cierra el ZIP.
   $zip->close();
   debug("         ", -1);
+  $conteo++;
+  //if ($conteo >= 5) exit;
 }
 
 

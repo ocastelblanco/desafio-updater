@@ -1,5 +1,13 @@
 <?php
 
+// Funciones para compatibilidad backward
+if (!function_exists('str_contains')) {
+  function str_contains($haystack, $needle)
+  {
+    return $needle !== '' && mb_strpos($haystack, $needle) !== false;
+  }
+}
+
 // Constantes generales
 const  BACKUP_FOLDER = __DIR__ . DIRECTORY_SEPARATOR . "backup" . DIRECTORY_SEPARATOR;
 //const ORIGEN = "Z:" . DIRECTORY_SEPARATOR . "CPCAN" . DIRECTORY_SEPARATOR . "global_assets" . DIRECTORY_SEPARATOR . "resource" . DIRECTORY_SEPARATOR;
