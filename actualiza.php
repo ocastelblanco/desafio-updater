@@ -250,13 +250,12 @@ foreach ($listaCambios as $idRecurso => $cambio) {
     } else {
       debug("Se harán " . count($editorial) . " reemplazos editoriales en la vista $rutaCont.", 5);
       foreach ($editorial as $sec => $cambioPag04) {
-        if (!$subject || !$cambioPag04["replacement"]) {
-          print $identificador . PHP_EOL;
-          print_r($editorial);
-          print PHP_EOL;
+        if ($subject && $subject != "") {
+          $subject = preg_replace($cambioPag04["pattern"], $cambioPag04["replacement"], $subject, -1, $countC);
+          debug("Reemplazo editorial en la sección $sec: " . ($countC == 1 ? "OK" : "ERROR"), 6);
+        } else {
+          debug("ERROR: Se destruyó el contenido de la pag04 en el recurso $identificador. Se recomienda restaurarlo y ajustarlo manualmente.", 3);
         }
-        $subject = preg_replace($cambioPag04["pattern"], $cambioPag04["replacement"], $subject, -1, $countC);
-        debug("Reemplazo editorial en la sección $sec: " . ($countC == 1 ? "OK" : "ERROR"), 6);
       }
     }
     if (!$dry) $zip->deleteName($rutaCont);
