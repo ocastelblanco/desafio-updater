@@ -124,38 +124,54 @@ foreach ($listaFuentes as $fuente) {
 // Mueve los cambios al elemento ["replacement"] y crea el ["pattern"] para todas las combinaciones pag / seccion
 foreach ($listaCambios as &$recurso) {
   // Para pag06
-  $pag06replacement = "<ul>\n" . implode("\n", $recurso["cambiosEditoriales"]["pag06"]) . "\n</ul>";
-  $recurso["cambiosEditoriales"]["pag06"] = [];
-  $recurso["cambiosEditoriales"]["pag06"]["replacement"] = $pag06replacement;
-  $recurso["cambiosEditoriales"]["pag06"]["pattern"] = '/<ul>.*?<\/ul-{0,2}>/s';
+  if (array_key_exists("pag06", $recurso["cambiosEditoriales"])) { // Si existe la pag "pag06"
+    $pag06replacement = "<ul>\n" . implode("\n", $recurso["cambiosEditoriales"]["pag06"]) . "\n</ul>";
+    $recurso["cambiosEditoriales"]["pag06"] = [];
+    $recurso["cambiosEditoriales"]["pag06"]["replacement"] = $pag06replacement;
+    $recurso["cambiosEditoriales"]["pag06"]["pattern"] = '/<ul>.*?<\/ul-{0,2}>/s';
+  } else {
+    debug("ADVERTENCIA: No existe ajuste editorial para la página Ve más allá del recurso " . $recurso["ruta"], 2);
+  }
   // Para pag08, se tienen que crear 2 <h3 class="texto-resaltado">
-  $pag08replacement = preg_replace(
-    '/(.*)\n?(¿Serás[^\?]+\?)/i',
-    "<h3 class=\"texto-resaltado\">$1</h3>\n<h3 class=\"texto-resaltado\">$2</h3>",
-    remueveTag($recurso["cambiosEditoriales"]["pag08"], "strong")
-  );
-  $recurso["cambiosEditoriales"]["pag08"] = [];
-  $recurso["cambiosEditoriales"]["pag08"]["replacement"] = $pag08replacement;
-  $recurso["cambiosEditoriales"]["pag08"]["pattern"] = '/<h3\s+class="texto-resaltado">[^<]*<\/h3>\s*<h3\s+class="texto-resaltado">[^<]*<\/h3>/s';
+  if (array_key_exists("pag08", $recurso["cambiosEditoriales"])) { // Si existe la pag "pag08"
+    $pag08replacement = preg_replace(
+      '/(.*)\n?(¿Serás[^\?]+\?)/i',
+      "<h3 class=\"texto-resaltado\">$1</h3>\n<h3 class=\"texto-resaltado\">$2</h3>",
+      remueveTag($recurso["cambiosEditoriales"]["pag08"], "strong")
+    );
+    $recurso["cambiosEditoriales"]["pag08"] = [];
+    $recurso["cambiosEditoriales"]["pag08"]["replacement"] = $pag08replacement;
+    $recurso["cambiosEditoriales"]["pag08"]["pattern"] = '/<h3\s+class="texto-resaltado">.*?<\/h3>(\s*<h3\s+class="texto-resaltado">.*?<\/h3>)?/s';
+  } else {
+    debug("ADVERTENCIA: No existe ajuste editorial para la página Meta del recurso " . $recurso["ruta"], 2);
+  }
   // Para pag04
   // sec01
-  $pag04sec01replacement = "$1<ul>\n" . implode("\n", $recurso["cambiosEditoriales"]["pag04"]["sec01"]) . "\n</ul>";
-  $recurso["cambiosEditoriales"]["pag04"]["sec01"] = [];
-  $recurso["cambiosEditoriales"]["pag04"]["sec01"]["replacement"] = $pag04sec01replacement;
-  $recurso["cambiosEditoriales"]["pag04"]["sec01"]["pattern"] = '/(<p>.*<strong>.*Propón\s+uno\s+o\s+escoge[^:]+:\s*<\/strong>\s*<\/p>\s*)<ul>.*?<\/ul>/s';
+  if (array_key_exists("sec01", $recurso["cambiosEditoriales"]["pag04"])) { // Si existe la clave "sec01"
+    $pag04sec01replacement = "$1<ul>\n" . implode("\n", $recurso["cambiosEditoriales"]["pag04"]["sec01"]) . "\n</ul>";
+    $recurso["cambiosEditoriales"]["pag04"]["sec01"] = [];
+    $recurso["cambiosEditoriales"]["pag04"]["sec01"]["replacement"] = $pag04sec01replacement;
+    $recurso["cambiosEditoriales"]["pag04"]["sec01"]["pattern"] = '/(<p>\s*<strong>\s*(Propón|Inspírate)[^:]*:\s*<\/strong>\s*<\/p>\s*)<ul>.*?<\/ul>/s';
+  } else {
+    debug("ADVERTENCIA: No existe ajuste editorial en la sección Lista de Escoge tu camino del recurso " . $recurso["ruta"], 2);
+  }
   // sec04_enlaces
-  $pag04sec04enlacesReplacement = "$1<ul>\n" . implode("\n", $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"]) . "\n</ul>";
-  $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"] = [];
-  $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"]["replacement"] = $pag04sec04enlacesReplacement;
-  $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"]["pattern"] = '/(<h3\s*class="texto-resaltado">¿Qu.*?Internet\?<\/h3>\s*<div\s*class="texto">\s*<p>\s*(<strong>)?\s*[^:]+:\s*(<\/strong>)?\s*<\/p>\s*)<ul>.*?<\/ul>/s';
+  if (array_key_exists("sec04_enlaces", $recurso["cambiosEditoriales"]["pag04"])) { // Si existe la clave "sec04_enlaces"
+    $pag04sec04enlacesReplacement = "$1<ul>\n" . implode("\n", $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"]) . "\n</ul>";
+    $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"] = [];
+    $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"]["replacement"] = $pag04sec04enlacesReplacement;
+    $recurso["cambiosEditoriales"]["pag04"]["sec04_enlaces"]["pattern"] = '/(<h3\s*class="texto-resaltado">¿Qu.*?Internet\?<\/h3>\s*<div\s*class="texto">\s*<p>\s*(<strong>)?\s*[^:]+:\s*(<\/strong>)?\s*<\/p>\s*)<ul>.*?<\/ul>/s';
+  } else {
+    debug("ADVERTENCIA: No existe ajuste editorial en la sección Enlaces de Escoge tu camino del recurso " . $recurso["ruta"], 2);
+  }
   // sec04_ingles 
   if (array_key_exists("sec04_ingles", $recurso["cambiosEditoriales"]["pag04"])) { // Si existe la clave "sec04_ingles"
     $pag04sec04inglesReplacement = "$1" . $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"] . "$2";
     $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"] = [];
     $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"]["replacement"] = $pag04sec04inglesReplacement;
-    $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"]["pattern"] = '/(<p>\s*<strong>\s*Si\s+te\s+atreves\s+con\s+[^<]*<\/strong>\s*).*?(<\/p>)/s';
+    $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"]["pattern"] = '/(<p>\s*(<strong>)?\s*Si\s+te\s+atreves\s+con\s+[^<]*(<\/strong>)?\s*).*?(<\/p>)/s';
   } else {
-    debug("ERROR: No existe sección Inglés en el recurso " . $recurso["ruta"], 2);
+    debug("ADVERTENCIA: o existe ajuste editorial en la sección Inglés de Escoge tu camino del recurso " . $recurso["ruta"], 2);
   }
 }
 
@@ -231,7 +247,6 @@ foreach ($listaCambios as $idRecurso => $cambio) {
     if ($pag != "pag04") {
       $subject = preg_replace($editorial["pattern"], $editorial["replacement"], $subject, -1, $countC);
       debug("Reemplazo editorial: " . ($countC == 1 ? "OK" : "ERROR"), 5);
-      if ($pag == "pag06") debug($subject, 6);
     } else {
       debug("Se harán " . count($editorial) . " reemplazos editoriales en la vista $rutaCont.", 5);
       foreach ($editorial as $sec => $cambioPag04) {
