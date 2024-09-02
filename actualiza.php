@@ -171,7 +171,7 @@ foreach ($listaCambios as &$recurso) {
     $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"]["replacement"] = $pag04sec04inglesReplacement;
     $recurso["cambiosEditoriales"]["pag04"]["sec04_ingles"]["pattern"] = '/(<p>\s*(<strong>)?\s*Si\s+te\s+atreves\s+con\s+[^<]*(<\/strong>)?\s*).*?(<\/p>)/s';
   } else {
-    debug("ADVERTENCIA: o existe ajuste editorial en la sección Inglés de Escoge tu camino del recurso " . $recurso["ruta"], 2);
+    debug("ADVERTENCIA: No existe ajuste editorial en la sección Inglés de Escoge tu camino del recurso " . $recurso["ruta"], 2);
   }
 }
 
@@ -233,6 +233,17 @@ foreach ($listaCambios as $idRecurso => $cambio) {
       $ciclo++;
       $subject = preg_replace($repCont["pattern"], $repCont["replacement"], $subject, -1, $countR);
       debug("Reemplazando texto número $ciclo: " . ($countR == 1 ? "OK" : "ERROR"), 6);
+      if ($rutaCont == "views/pag06.html" && $ciclo == 3 && $countR != 1) { // Ajuste manual: algunas pag06 tienen un texto final diferente.
+        $reem = '/(<p>\s*<strong>\s*)Además,.*?<em>Refuerza tu aprendizaje\.?<\/em>\.?(<\/strong><\/p>)/s';
+        $subject = preg_replace(
+          $reem,
+          $repCont["replacement"],
+          $subject,
+          -1,
+          $countR
+        );
+        debug("Reemplazando texto número $ciclo (segundo patrón): " . ($countR == 1 ? "OK" : "ERROR"), 6);
+      }
     }
     debug("Se reemplaza el HTML original con el HTML resultado de los cambios.", 5);
     if (!$dry) $zip->deleteName($rutaCont);
@@ -279,8 +290,8 @@ function getRecursoID($fila, $indice)
   $titulo = $fila[0];
   $unidad = substr($fila[1], 0, strpos($fila[1], "_Recurso"));
   foreach ($indice as $recurso) {
-    //if ($recurso["titulo"] == $titulo && $recurso["unidad"] == $unidad) {
-    if ($recurso["titulo"] == $titulo || $recurso["unidad"] == $unidad) {
+    if ($recurso["titulo"] == $titulo && $recurso["unidad"] == $unidad) {
+      //if ($recurso["titulo"] == $titulo || $recurso["unidad"] == $unidad) {
       return $recurso["id"];
     }
   }

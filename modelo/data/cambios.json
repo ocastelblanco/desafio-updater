@@ -47,8 +47,8 @@
           "replacement": "Puedes centrarte en alguna de las siguientes propuestas:"
         },
         {
-          "pattern": "/(<p><strong>).*?icono <img class=\"icono\" src=\".\\/int\\/icono_ra.png\">(\\.<\\/strong><\\/p>)/i",
-          "replacement": "$1Ten en cuenta los pasos necesarios para completar el trabajo de investigación y ampliar, con ello, tus conocimientos sobre el tema$2"
+          "pattern": "/(<p><strong>).*?icono <img class=\"icono\" src=\".\\/int\\/icono_ra.png\">\\.(<\\/strong><\\/p>)/i",
+          "replacement": "$1Ten en cuenta los pasos necesarios para completar el trabajo de investigación y ampliar, con ello, tus conocimientos sobre el tema.$2"
         }
       ]
     },
