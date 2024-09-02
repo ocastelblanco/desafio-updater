@@ -45,7 +45,7 @@ foreach ($iterador as $archivo) {
     array_push($listaDestino, $destino);
     $id = str_replace(BACKUP_FOLDER, "", $origen);
     $id = str_replace(NOMBRE_ZIP, "", $id);
-    $id = implode("", explode("/", $id));
+    $id = implode("", explode(DIRECTORY_SEPARATOR, $id));
     $id = preg_replace('/^0+/s', "", $id);
     $recurso = findPorID($id, $indice);
     array_push($listaUnidades, $recurso["unidad"]);
