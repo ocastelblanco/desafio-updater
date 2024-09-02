@@ -30,8 +30,11 @@ foreach ($argv as $pos => $arg) {
   }
 }
 
+$indice = indice();
+
 $listaOrigen = [];
 $listaDestino = [];
+$listaUnidades = [];
 $iterador = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(BACKUP_FOLDER));
 foreach ($iterador as $archivo) {
   $esPunto = substr(basename($archivo->getPathname()), 0, 1) == ".";
@@ -40,24 +43,32 @@ foreach ($iterador as $archivo) {
     array_push($listaOrigen, $origen);
     $destino = ORIGEN . str_replace(BACKUP_FOLDER, "", $origen);
     array_push($listaDestino, $destino);
+    $id = str_replace(BACKUP_FOLDER, "", $origen);
+    $id = str_replace(NOMBRE_ZIP, "", $id);
+    $id = implode("", explode("/", $id));
+    $id = preg_replace('/^0+/s', "", $id);
+    $recurso = findPorID($id, $indice);
+    array_push($listaUnidades, $recurso["unidad"]);
   }
 }
-
+$gestorCSV = fopen("unidades_restauradas.csv", "w");
+fputcsv($gestorCSV, ["unit_code"]);
 if (isset($_VAR["all"])) {
   debug("Se activó la opción ALL. Se restaurarán " . count($listaOrigen) . " archivos.", -1);
   for ($i = 0; $i < count($listaDestino); $i++) {
     $origen = $listaOrigen[$i];
     $destino = $listaDestino[$i];
     restaurando($origen, $destino, $i, count($listaDestino));
+    fputcsv($gestorCSV, [$listaUnidades[$i]]);
   }
 } else {
   if (isset($_VAR["fuente"])) {
     $listaRecs = leerArchivoLista($_VAR["fuente"]);
-    $indice = indice();
     $listaRest = [];
     foreach ($listaRecs as $num => $id) {
       if ($recurso = findPorID($id, $indice)) {
         $listaRest[] = BACKUP_FOLDER . getRutaRecurso($recurso["id"]);
+        $listaUnidades[] = $recurso["unidad"];
       } else {
         debug("ERROR: El recurso $id de la línea $num del archivo " . $_VAR["fuente"] . " no es un Desafío. No se tendrá en cuenta para la restauración.", 1);
       }
@@ -67,6 +78,7 @@ if (isset($_VAR["all"])) {
       $destino = ORIGEN . str_replace(BACKUP_FOLDER, "", $origen);
       if (file_exists($destino) && file_exists($origen)) {
         restaurando($origen, $destino, $numR, count($listaRest));
+        fputcsv($gestorCSV, [$listaUnidades[$i]]);
       } else {
         debug("ERROR: El recurso $id de la línea $num del archivo " . $_VAR["fuente"] . " no se restaurará.", 1);
         if (!file_exists($origen)) {
@@ -79,6 +91,7 @@ if (isset($_VAR["all"])) {
     }
   }
 }
+fclose($gestorCSV);
 
 // Funciones
 function leerArchivoLista($archivo)
