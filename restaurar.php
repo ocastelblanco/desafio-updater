@@ -44,7 +44,7 @@ foreach ($iterador as $archivo) {
 }
 
 if (isset($_VAR["all"])) {
-  print "Se restaurarán " . count($listaOrigen) . " archivos." . PHP_EOL;
+  debug("Se activó la opción ALL. Se restaurarán " . count($listaOrigen) . " archivos.", -1);
   for ($i = 0; $i < count($listaDestino); $i++) {
     $origen = $listaOrigen[$i];
     $destino = $listaDestino[$i];
@@ -59,27 +59,26 @@ if (isset($_VAR["all"])) {
       if ($recurso = findPorID($id, $indice)) {
         $listaRest[] = BACKUP_FOLDER . getRutaRecurso($recurso["id"]);
       } else {
-        print "El recurso $id de la línea $num del archivo " . $_VAR["fuente"] . " no es un Desafío. No se tendrá en cuenta para la restauración." . PHP_EOL;
+        debug("ERROR: El recurso $id de la línea $num del archivo " . $_VAR["fuente"] . " no es un Desafío. No se tendrá en cuenta para la restauración.", 1);
       }
     }
-    print "Se restaurarán " . count($listaRest) . " recursos en total." . PHP_EOL;
+    debug("Se restaurarán " . count($listaRest) . " recursos en total.", 0);
     foreach ($listaRest as $numR => $origen) {
       $destino = ORIGEN . str_replace(BACKUP_FOLDER, "", $origen);
       if (file_exists($destino) && file_exists($origen)) {
         restaurando($origen, $destino, $numR, count($listaRest));
       } else {
+        debug("ERROR: El recurso $id de la línea $num del archivo " . $_VAR["fuente"] . " no se restaurará.", 1);
         if (!file_exists($origen)) {
-          print "El recurso $id de la línea $num del archivo " . $_VAR["fuente"] . " con ruta $origen, no existe. No se restaurará." . PHP_EOL;
+          debug("La ruta origen $origen, no existe.", 2);
         }
         if (!file_exists($destino)) {
-          print "El recurso $id de la línea $num del archivo " . $_VAR["fuente"] . " con ruta $origen, no existe. No se restaurará." . PHP_EOL;
+          debug("La ruta destino $destino, no existe.", 2);
         }
       }
     }
   }
 }
-
-
 
 // Funciones
 function leerArchivoLista($archivo)
@@ -126,6 +125,15 @@ function getRutaRecurso($id, $conZIP = true)
 function restaurando($origen, $destino, $num, $numTotal)
 {
   global $_VAR;
-  print "Reemplazando archivo " . ($num + 1) . " de $numTotal:" . PHP_EOL . "   FROM: $origen" . PHP_EOL . "   TO: $destino" . PHP_EOL;
+  debug("Reemplazando archivo " . ($num + 1) . " de $numTotal.", 1);
+  debug("FROM: $origen - TO: $destino", 2);
   if (!isset($_VAR["dry"])) copy($origen, $destino);
+}
+function debug($texto, $nivel)
+{
+  $fechaHora = new DateTime();
+  $timestampISO = $fechaHora->format(DateTime::ATOM);
+  $salida = $timestampISO . (($nivel < 0) ? " " : str_repeat(" ", $nivel) . " └─ ") . $texto . PHP_EOL;
+  file_put_contents("debug_restauracion.txt", $salida, FILE_APPEND);
+  if ($nivel < 4) print $salida;
 }
