@@ -68,10 +68,52 @@ foreach ($listaFuentes as $fuente) {
   $countCambios = count($listaCambios);
   $gestor = fopen($fuente, "r");
   $num = 0;
+  $col = [
+    "titulo" => 0,
+    "unidad" => 1,
+    "id" => 2,
+    "pag" => 3,
+    "tipo" => 4,
+    "enlace" => 5,
+    "principal" => 6,
+    "adicional" => 7,
+  ];
   while (($fila = fgetcsv($gestor, null, ";")) !== false) { // Recorre cada línea del archivo fuente
-    if ($num > 0) {
+    if ($num < 1) { // Lee el encabezado y encuentra los valores de columna
+      foreach ($fila as $nC => $nomCol) {
+        switch ($nomCol) {
+          case "Nombre recurso":
+            $col["titulo"] = $nC;
+            break;
+          case "identificadorUnidad":
+            $col["unidad"] = $nC;
+            break;
+          case "asset_id":
+            $col["id"] = $nC;
+            break;
+          case "Página":
+            $col["pag"] = $nC;
+            break;
+          case "Tipo":
+            $col["tipo"] = $nC;
+            break;
+          case "Enlace":
+            $col["enlace"] = $nC;
+            break;
+          case "Texto principal":
+            $col["principal"] = $nC;
+            break;
+          case "Texto adicional":
+            $col["adicional"] = $nC;
+            break;
+        }
+      }
+    } else {
       $id = getRecursoID($fila, $indice);
-      $nomPag = $np[$fila[3]];
+      if (null === $id) {
+        debug("ERROR: No se encontraron en el índice los datos de la fuente " . $fila["titulo"] . " | " . $fila["unidad"] . " | " . $fila["id"] . ".", 1);
+      }
+      $nomPag = $np[$fila[$col["pag"]]];
       if (!array_key_exists($id, $listaCambios)) { // Si no existe el ID como KEY del array, lo crea, junto con la ruta y el array de cambios
         $ruta = ORIGEN . getRutaRecurso($id);
         $listaCambios[$id] = [
@@ -86,30 +128,30 @@ foreach ($listaFuentes as $fuente) {
       }
       switch ($nomPag) { // Se crean los siguientes niveles de contenido.
         case "pag08": // La pag08, Meta, solo tiene un título. No se aceptan más elementos.
-          $listaCambios[$id]["cambiosEditoriales"][$nomPag] = $fila[6];
+          $listaCambios[$id]["cambiosEditoriales"][$nomPag] = $fila[$col["principal"]];
           break;
         case "pag06": // La pag06, Ve más allá, es un listado de textos
           if (!array_key_exists($nomPag, $listaCambios[$id]["cambiosEditoriales"])) {
             $listaCambios[$id]["cambiosEditoriales"][$nomPag] = [];
           }
-          $listaCambios[$id]["cambiosEditoriales"][$nomPag][] = "<li>" . $fila[6] . "</li>";
+          $listaCambios[$id]["cambiosEditoriales"][$nomPag][] = "<li>" . $fila[$col["principal"]] . "</li>";
           break;
         case "pag04": // La pag04 tiene 2 sec: sec01, un listado, y sec04 con dos contenidos: un listado de enlaces y un texto con enlace en inglés
-          $nomSec = $ns[$fila[4]];
+          $nomSec = $ns[$fila[$col["tipo"]]];
           if ($nomSec == "sec01") {
             if (!array_key_exists($nomSec, $listaCambios[$id]["cambiosEditoriales"][$nomPag])) {
               $listaCambios[$id]["cambiosEditoriales"][$nomPag][$nomSec] = [];
             }
-            $listaCambios[$id]["cambiosEditoriales"][$nomPag][$nomSec][] = "<li>" . $fila[6] . " " . $fila[7] . "</li>";
+            $listaCambios[$id]["cambiosEditoriales"][$nomPag][$nomSec][] = "<li>" . $fila[$col["principal"]] . " " . $fila[$col["adicional"]] . "</li>";
           }
           if ($nomSec == "sec04_enlaces") {
             if (!array_key_exists($nomSec, $listaCambios[$id]["cambiosEditoriales"][$nomPag])) {
               $listaCambios[$id]["cambiosEditoriales"][$nomPag][$nomSec] = [];
             }
-            $listaCambios[$id]["cambiosEditoriales"][$nomPag][$nomSec][] = "<li><a target=\"_blank\" href=\"" . $fila[5] . "\">" . $fila[6] . "</a>" . $fila[7] . "</li>";
+            $listaCambios[$id]["cambiosEditoriales"][$nomPag][$nomSec][] = "<li><a target=\"_blank\" href=\"" . $fila[$col["enlace"]] . "\">" . $fila[$col["principal"]] . "</a>" . $fila[$col["adicional"]] . "</li>";
           }
           if ($nomSec == "sec04_ingles") {
-            $listaCambios[$id]["cambiosEditoriales"][$nomPag][$nomSec] = "<a target=\"_blank\" href=\"" . $fila[5] . "\">" . $fila[6] . "</a>" . $fila[7];
+            $listaCambios[$id]["cambiosEditoriales"][$nomPag][$nomSec] = "<a target=\"_blank\" href=\"" . $fila[$col["enlace"]] . "\">" . $fila[$col["principal"]] . "</a>" . $fila[$col["adicional"]];
           }
           break;
       }
@@ -287,11 +329,20 @@ foreach ($listaCambios as $idRecurso => $cambio) {
 // Funciones
 function getRecursoID($fila, $indice)
 {
-  $titulo = $fila[0];
-  $unidad = substr($fila[1], 0, strpos($fila[1], "_Recurso"));
+  global $col;
+  $titulo = trim(strtolower($fila[$col["titulo"]]));
+  $unidad = trim(strtolower(preg_replace('/_Recurso\d{2,4}/s', "", $fila[$col["unidad"]])));
+  $id = $fila[$col["id"]];
   foreach ($indice as $recurso) {
-    if ($recurso["titulo"] == $titulo && $recurso["unidad"] == $unidad) {
-      //if ($recurso["titulo"] == $titulo || $recurso["unidad"] == $unidad) {
+    $recTitulo = trim(strtolower($recurso["titulo"]));
+    $recUnidad = trim(strtolower($recurso["unidad"]));
+    if ($id == $recurso["id"]) {
+      if ($recUnidad != $unidad) debug("ERROR: No coincide el nombre de unidad de la fuente $unidad con el del índice $recUnidad.", 1);
+      if ($recTitulo != $titulo) debug("ERROR: No coincide el nombre del asset de la fuente $titulo con el del índice $recTitulo.", 1);
+    }
+    if ($recTitulo == $titulo && $recUnidad == $unidad) {
+      // También debe coincidir $recurso["id"] con $id
+      if ($id != $recurso["id"]) debug("ADVERTENCIA: No coincide el ID de la fuente $id con el del índice " . $recurso["indice"], 1);
       return $recurso["id"];
     }
   }
