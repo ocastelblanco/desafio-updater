@@ -25,6 +25,17 @@ foreach ($argv as $pos => $arg) {
   }
 }
 
+$col = [
+  "titulo" => 0,
+  "unidad" => 1,
+  "id" => 2,
+  "pag" => 3,
+  "tipo" => 4,
+  "enlace" => 5,
+  "principal" => 6,
+  "adicional" => 7,
+];
+
 $listaFuentes = fuentes();
 $indice = indice();
 $listaUnidades = [];
@@ -35,7 +46,36 @@ foreach ($listaFuentes as $fuente) {
   $gestor = fopen($fuente, "r");
   $num = 0;
   while (($fila = fgetcsv($gestor, null, ";")) !== false) { // Recorre cada línea del archivo fuente
-    if ($num > 0) {
+    if ($num < 1) { // Lee el encabezado y encuentra los valores de columna
+      foreach ($fila as $nC => $nomCol) {
+        switch ($nomCol) {
+          case "Nombre recurso":
+            $col["titulo"] = $nC;
+            break;
+          case "identificadorUnidad":
+            $col["unidad"] = $nC;
+            break;
+          case "asset_id":
+            $col["id"] = $nC;
+            break;
+          case "Página":
+            $col["pag"] = $nC;
+            break;
+          case "Tipo":
+            $col["tipo"] = $nC;
+            break;
+          case "Enlace":
+            $col["enlace"] = $nC;
+            break;
+          case "Texto principal":
+            $col["principal"] = $nC;
+            break;
+          case "Texto adicional":
+            $col["adicional"] = $nC;
+            break;
+        }
+      }
+    } else {
       $unidad = getUnidad($fila, $indice);
       if (!in_array($unidad, $listaUnidades)) array_push($listaUnidades, $unidad);
     }
@@ -113,23 +153,27 @@ function fuentes()
 }
 function getRecursoID($fila, $indice)
 {
-  $titulo = $fila[0];
-  $unidad = substr($fila[1], 0, strpos($fila[1], "_Recurso"));
+  global $col;
+  $titulo = trim(strtolower($fila[$col["titulo"]]));
+  $unidad = trim(strtolower(preg_replace('/_Recurso\d{2,4}/s', "", $fila[$col["unidad"]])));
+  $id = $fila[$col["id"]];
   foreach ($indice as $recurso) {
-    if ($recurso["titulo"] == $titulo && $recurso["unidad"] == $unidad) {
-      return $recurso["id"];
-    }
+    $recTitulo = trim(strtolower($recurso["titulo"]));
+    $recUnidad = trim(strtolower($recurso["unidad"]));
+    if ($recTitulo == $titulo && $recUnidad == $unidad) return $recurso["id"];
   }
   return null;
 }
 function getUnidad($fila, $indice)
 {
-  $titulo = $fila[0];
-  $unidad = substr($fila[1], 0, strpos($fila[1], "_Recurso"));
+  global $col;
+  $titulo = trim(strtolower($fila[$col["titulo"]]));
+  $unidad = trim(strtolower(preg_replace('/_Recurso\d{2,4}/s', "", $fila[$col["unidad"]])));
+  $id = $fila[$col["id"]];
   foreach ($indice as $recurso) {
-    if ($recurso["titulo"] == $titulo && $recurso["unidad"] == $unidad) {
-      return $recurso["unidad"];
-    }
+    $recTitulo = trim(strtolower($recurso["titulo"]));
+    $recUnidad = trim(strtolower($recurso["unidad"]));
+    if ($recTitulo == $titulo && $recUnidad == $unidad) return $recurso["unidad"];
   }
   return null;
 }

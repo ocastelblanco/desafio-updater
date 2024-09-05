@@ -137,7 +137,7 @@ foreach ($listaFuentes as $fuente) {
           $listaCambios[$id]["cambiosEditoriales"][$nomPag][] = "<li>" . $fila[$col["principal"]] . "</li>";
           break;
         case "pag04": // La pag04 tiene 2 sec: sec01, un listado, y sec04 con dos contenidos: un listado de enlaces y un texto con enlace en inglés
-          $nomSec = $ns[$fila[$col["tipo"]]];
+          $nomSec = $ns[trim($fila[$col["tipo"]])];
           if ($nomSec == "sec01") {
             if (!array_key_exists($nomSec, $listaCambios[$id]["cambiosEditoriales"][$nomPag])) {
               $listaCambios[$id]["cambiosEditoriales"][$nomPag][$nomSec] = [];

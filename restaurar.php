@@ -78,9 +78,9 @@ if (isset($_VAR["all"])) {
       $destino = ORIGEN . str_replace(BACKUP_FOLDER, "", $origen);
       if (file_exists($destino) && file_exists($origen)) {
         restaurando($origen, $destino, $numR, count($listaRest));
-        fputcsv($gestorCSV, [$listaUnidades[$i]]);
+        fputcsv($gestorCSV, [$listaUnidades[$numR]]);
       } else {
-        debug("ERROR: El recurso $id de la línea $num del archivo " . $_VAR["fuente"] . " no se restaurará.", 1);
+        debug("ERROR: El recurso " . $listaUnidades[$numR] . " de la línea " . ($numR + 1) . " del archivo " . $_VAR["fuente"] . " no se restaurará.", 1);
         if (!file_exists($origen)) {
           debug("La ruta origen $origen, no existe.", 2);
         }
@@ -126,7 +126,7 @@ function findPorID($id, $array)
 {
   if (str_contains($id, "Recurso")) $id = preg_replace('/([A-Z]{2}.*)_Recurso\d{2,4}/', "$1", $id);
   foreach ($array as $el) {
-    if ($el["id"] == $id || $el["titulo"] == $id || $el["unidad"] == $id) return $el;
+    if ($el["id"] == $id /*|| $el["titulo"] == $id || $el["unidad"] == $id*/) return $el;
   }
   return null;
 }
