@@ -111,7 +111,7 @@ foreach ($listaFuentes as $fuente) {
     } else {
       $id = getRecursoID($fila, $indice);
       if (null === $id) {
-        debug("ERROR: No se encontraron en el índice los datos de la fuente " . $fila["titulo"] . " | " . $fila["unidad"] . " | " . $fila["id"] . ".", 1);
+        debug("ERROR: No se encontraron en el índice los datos de la fuente " . $fila[$col["titulo"]] . " | " . $fila[$col["unidad"]] . " | " . $fila[$col["id"]] . ".", 1);
       }
       $nomPag = $np[$fila[$col["pag"]]];
       if (!array_key_exists($id, $listaCambios)) { // Si no existe el ID como KEY del array, lo crea, junto con la ruta y el array de cambios
@@ -342,7 +342,7 @@ function getRecursoID($fila, $indice)
     }
     if ($recTitulo == $titulo && $recUnidad == $unidad) {
       // También debe coincidir $recurso["id"] con $id
-      if ($id != $recurso["id"]) debug("ADVERTENCIA: No coincide el ID de la fuente $id con el del índice " . $recurso["indice"], 1);
+      if ($id != $recurso["id"]) debug("ADVERTENCIA: No coincide el ID de la fuente $id con el del índice " . ($recurso["indice"] ?? ""), 1);
       return $recurso["id"];
     }
   }
