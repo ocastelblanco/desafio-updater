@@ -1,8 +1,8 @@
 :root {
-  --cf: #b3d25d;
-  --ct: #337411;
-  --if: url("../int/portada_cn.jpg");
-  --bi: rgba(51, 116, 117, 0.25);
+  --cf: #47ab72;
+  --ct: #008a3b;
+  --if: url("../int/portada_fq.jpg");
+  --bi: rgba(0, 138, 59, 0.25);
 }
 .embed-responsive {
   position: relative;
