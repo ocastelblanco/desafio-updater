@@ -29,7 +29,7 @@ function extraerHtmlYGenerarCSV($id)
     $csvFile = __DIR__ . DIRECTORY_SEPARATOR . "extraidos" . DIRECTORY_SEPARATOR . "$id.csv";
     $fileHandle = fopen($csvFile, 'w');
     fwrite($fileHandle, "\xEF\xBB\xBF");  // Agregar BOM para indicar UTF-8
-    fputcsv($fileHandle, ['Ruta', 'Pag', 'XPath', 'Texto']);
+    fputcsv($fileHandle, ['Ruta', 'Pag', 'XPath', 'Texto'], ";");
     for ($i = 1; $i <= 8; $i++) {
       $htmlFile = 'views/pag0' . $i . '.html';
       procesarHtmlDelZip($zip, $htmlFile, $ruta, $fileHandle);
@@ -55,7 +55,7 @@ function procesarHtmlDelZip($zip, $htmlFile, $ruta, $fileHandle)
     $text = trim($node->nodeValue);
     if ($text !== '') {
       $nodeXPath = obtenerXPath($node);
-      fputcsv($fileHandle, [$ruta, $htmlFile, $nodeXPath, $text]);
+      fputcsv($fileHandle, [$ruta, $htmlFile, $nodeXPath, $text], ";");
     }
   }
 }

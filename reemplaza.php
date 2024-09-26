@@ -28,9 +28,9 @@ function reemplazar($csvFile)
 {
 	global $dry;
 	if (($handle = fopen($csvFile, "r")) !== FALSE) {
-		$header = fgetcsv($handle);
+		$header = fgetcsv($handle, null, ";");
 		$numFila = 1;
-		while (($data = fgetcsv($handle)) !== FALSE) {
+		while (($data = fgetcsv($handle, null, ";")) !== FALSE) {
 			list($zipPath, $htmlFile, $nodeXPath, $newText) = $data;
 			if (file_exists($zipPath)) {
 				$zip = new ZipArchive;
