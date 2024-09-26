@@ -1,19 +1,20 @@
 <?php
 
-//const ORIGEN = "Z:" . DIRECTORY_SEPARATOR . "CPCAN" . DIRECTORY_SEPARATOR . "global_assets" . DIRECTORY_SEPARATOR . "resource" . DIRECTORY_SEPARATOR;
-const ORIGEN = __DIR__ . DIRECTORY_SEPARATOR . "backup" . DIRECTORY_SEPARATOR;
+const ORIGEN = "Z:" . DIRECTORY_SEPARATOR . "CPCAN" . DIRECTORY_SEPARATOR . "global_assets" . DIRECTORY_SEPARATOR . "resource" . DIRECTORY_SEPARATOR;
+//const ORIGEN = __DIR__ . DIRECTORY_SEPARATOR . "backup" . DIRECTORY_SEPARATOR;
 const NOMBRE_ZIP = "_resource_content.zip";
 
-$listaID = [
-  "21930",
-  "23155",
-  "23244",
-  "23341",
-];
+$listaID = [];
+$gestor = fopen("ListaDesafiosCO.csv", "r");
+$header = fgetcsv($gestor);
+while (($linea = fgetcsv($gestor)) !== FALSE) {
+  $listaID[] = $linea[0];
+}
+debug("Se etraerán los contenidos de " . count($listaID) . " assets.", -1);
 if (!file_exists("extraidos")) mkdir("extraidos");
-foreach ($listaID as $id) {
-  debug("Inicia extracción de $id.", -1);
-  debug(extraerHtmlYGenerarCSV($id), 0);
+foreach ($listaID as $num => $id) {
+  debug("Inicia extracción " . ($num + 1) . "/" . count($listaID) . " ID: $id.", 0);
+  debug(extraerHtmlYGenerarCSV($id), 1);
 }
 
 // Funciones
